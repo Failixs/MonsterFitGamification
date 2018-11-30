@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">MonsterFit</string>
     <string name="title_activity_main">MainActivity</string>
+    <string name="title">Monster Fit</string>
 </resources>
