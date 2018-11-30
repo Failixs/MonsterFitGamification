@@ -1,5 +1,5 @@
 # MonsterFitGamification
-#titten
+#tit
 
 Gamificatied Fitness app
 
