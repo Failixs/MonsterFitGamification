@@ -1,5 +1,4 @@
 # MonsterFitGamification
-#tit
 
 Gamificatied Fitness app
 
