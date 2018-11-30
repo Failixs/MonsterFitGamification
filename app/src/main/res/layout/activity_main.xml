@@ -28,6 +28,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/title"
-        app:srcCompat="@drawable/Machomei"
+        app:srcCompat="@drawable/machomei"
         tools:layout_editor_absoluteX="82dp" />
 </android.support.constraint.ConstraintLayout>
