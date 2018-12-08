@@ -59,6 +59,7 @@
         android:layout_marginBottom="16dp"
         android:background="@color/colorAccent"
         android:text="@string/startPageLeftButton"
+        android:onClick="changeViewToMonsterSelection"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/rigthButton"
         app:layout_constraintStart_toStartOf="parent" />
