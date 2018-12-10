@@ -6,4 +6,13 @@
     <string name="startPageRightButton">VS</string>
     <string name="machomei">Machomei</string>
     <string name="fettsack">Fettsack</string>
+    <string name="statistics">Statistiken</string>
+    <string name="Fitsack">Fitsack</string>
+    <string name="title_activity_scrolling">ScrollingActivity</string>
+    <string name="action_settings">Settings</string>
+    <string name="killedMonster">Killed Monsters: </string>
+    <string name="PushUps">Done Push-Ups: </string>
+    <string name="SitUps">Done Sit-Ups: </string>
+    <string name="Lunges">Done Lunges: </string>
+    <string name="timeInstalled">Time installed:</string>
 </resources>
