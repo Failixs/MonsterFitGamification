@@ -11,8 +11,12 @@
     <string name="title_activity_scrolling">ScrollingActivity</string>
     <string name="action_settings">Settings</string>
     <string name="killedMonster">Killed Monsters: </string>
-    <string name="PushUps">Done Push-Ups: </string>
-    <string name="SitUps">Done Sit-Ups: </string>
-    <string name="Lunges">Done Lunges: </string>
+    <string name="DonePushUps">Done Push-Ups: </string>
+    <string name="DoneSitUps">Done Sit-Ups: </string>
+    <string name="DoneLunges">Done Lunges: </string>
     <string name="timeInstalled">Time installed:</string>
+    <string name="PushUps">Push Ups</string>
+    <string name="WideGripPushUps">Wide Grip Push Ups</string>
+    <string name="OneArmPushUps">One Arm Push Ups</string>
+    <string name="HandsPressing">Hands pressing</string>
 </resources>

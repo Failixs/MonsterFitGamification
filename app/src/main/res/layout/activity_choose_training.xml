@@ -8,7 +8,7 @@
     tools:context=".ChooseTrainingActivity">
 
     <ImageButton
-        android:id="@+id/armMonsterButton"
+        android:id="@+id/chestMonsterButton"
         android:layout_width="221dp"
         android:layout_height="242dp"
         android:layout_marginStart="144dp"
@@ -16,6 +16,7 @@
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
         android:layout_marginBottom="252dp"
+        android:onClick="changeViewToChestActivity"
         android:src="@drawable/machomei"
         android:background="@color/background"
         android:text="@string/startPageLeftButton"
