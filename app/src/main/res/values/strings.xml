@@ -7,16 +7,19 @@
     <string name="machomei">Machomei</string>
     <string name="fettsack">Fettsack</string>
     <string name="statistics">Statistiken</string>
-    <string name="Fitsack">Fitsack</string>
+    <string name="fitsack">Fitsack</string>
     <string name="title_activity_scrolling">ScrollingActivity</string>
     <string name="action_settings">Settings</string>
     <string name="killedMonster">Killed Monsters: </string>
-    <string name="DonePushUps">Done Push-Ups: </string>
-    <string name="DoneSitUps">Done Sit-Ups: </string>
-    <string name="DoneLunges">Done Lunges: </string>
+    <string name="donePushUps">Done Push-Ups: </string>
+    <string name="doneSitUps">Done Sit-Ups: </string>
+    <string name="doneLunges">Done Lunges: </string>
     <string name="timeInstalled">Time installed:</string>
-    <string name="PushUps">Push Ups</string>
-    <string name="WideGripPushUps">Wide Grip Push Ups</string>
-    <string name="OneArmPushUps">One Arm Push Ups</string>
-    <string name="HandsPressing">Hands pressing</string>
+    <string name="pushUps">Push Ups</string>
+    <string name="wideGripPushUps">Wide Grip Push Ups</string>
+    <string name="oneArmPushUps">One Arm Push Ups</string>
+    <string name="handsPressing">Hands pressing</string>
+    <string name="pushUpsInstruction">To do: Get into plank position, with your hands under but slightly outside of your shoulders.
+        Lower your body until your chest nearly touches the floor.  As you lower yourself, tuck your elbows, pulling them close to your body so that your upper arms form a 45-degree angle when your torso is in the bottom position of the move. Pause, then push back to the starting position as quickly as possible. Keep your core braced the entire time.  If your hips sag at any point during the exercise, your form has been broken. When this happens, consider that your last repetition and end the set.
+        If it hurts your wrists to put your hands directly on the floor, place a pair of dumbbells (use a pair with flat edges, like hex dumbbells) at the spots where you\'d position your hands. Then grasp the dumbbells\' handles and keep your wrists straight as you perform the exercise.</string>
 </resources>
