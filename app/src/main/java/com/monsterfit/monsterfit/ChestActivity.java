@@ -45,25 +45,33 @@ public class ChestActivity extends AppCompatActivity {
         final String wideGripPushUps = getString(R.string.wideGripPushUps);
         final String handsPressing = getString(R.string.handsPressing);
         final String oneArmPushUps = getString(R.string.oneArmPushUps);
+        final String inclinePushUps = getString(R.string.inclinePushUps);
+        final String declinePushUps = getString(R.string.declinePushUps);
+        final String tensionPushUps = getString(R.string.tensionPushUps);
+
         final String pushUpsInstruction = getString(R.string.pushUpsInstruction);
-        final String exercisesEasy[] = {pushUps,wideGripPushUps,handsPressing,oneArmPushUps};
-        final String exercisesMiddle[] = {pushUps,wideGripPushUps,handsPressing,oneArmPushUps};
-        final String exercisesHard[] = {pushUps,wideGripPushUps,handsPressing,oneArmPushUps};
+        final String wideGripPushUpsInstruction = getString(R.string.wideGripPushUpsInstruction);
+        final String handsPressingInstruction = getString(R.string.handsPressingInstruction);
+        final String oneArmPushUpsInstruction = getString(R.string.oneArmPushUpsInstruction);
+        final String inclinePushUpsInstruction = getString(R.string.inclinePushUpsInstruction);
+        final String declinePushUpsInstruction = getString(R.string.declinePushUpsInstruction);
+        final String tensionPushUpsInstruction = getString(R.string.tensionPushUpsInstruction);
+
+        final String exercisesEasy[] = {pushUps,handsPressing,inclinePushUps};
+        final String exercisesMiddle[] = {pushUps,tensionPushUps,wideGripPushUps};
+        final String exercisesHard[] = {oneArmPushUps,declinePushUps,wideGripPushUps};
 
         //buttons,bars etc.
         final ProgressBar monsterHealthBar = findViewById(R.id.monsterHealthBar);
         final TextView monsterHealthNumber = findViewById(R.id.monsterHealthNumber);
-        final TextView popupText = findViewById(R.id.popupText);
         final Button topLeftButton = findViewById(R.id.topLeftButton);
         final Button topRightButton = findViewById(R.id.topRightButton);
         final Button bottomLeftButton = findViewById(R.id.bottomLeftButton);
         final Button bottomRightButton = findViewById(R.id.bottomRightButton);
         final FloatingActionButton floatingButtonTopLeft = findViewById(R.id.floatingActionButtonTopLeft);
-
-
-
-
-
+        final FloatingActionButton floatingButtonTopRight = findViewById(R.id.floatingActionButtonTopRight);
+        final FloatingActionButton floatingButtonBottomLeft = findViewById(R.id.floatingActionButtonBottomLeft);
+        final FloatingActionButton floatingButtonBottomRight = findViewById(R.id.floatingActionButtonBottomRight);
 
 
         monsterHealthBar.setMax(maxHealth);
@@ -72,9 +80,9 @@ public class ChestActivity extends AppCompatActivity {
 
         //initialize random buttons
         topLeftButton.setText(exercisesEasy[random(exercisesEasy.length)]);
-        topRightButton.setText(exercisesEasy[random(exercisesEasy.length)]);
-        bottomLeftButton.setText(exercisesEasy[random(exercisesEasy.length)]);
-        bottomRightButton.setText(exercisesEasy[random(exercisesEasy.length)]);
+        topRightButton.setText(exercisesMiddle[random(exercisesEasy.length)]);
+        bottomLeftButton.setText(exercisesMiddle[random(exercisesEasy.length)]);
+        bottomRightButton.setText(exercisesHard[random(exercisesEasy.length)]);
 
 
 
@@ -84,11 +92,38 @@ public class ChestActivity extends AppCompatActivity {
         topLeftButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Code here executes on main thread after user presses button
+                currentHealth -= 25;
+                monsterHealthBar.setProgress(currentHealth);
+                monsterHealthNumber.setText(" " + String.valueOf(currentHealth) + "/1000 HP");
+            }
+        });
+        topRightButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // Code here executes on main thread after user presses button
+                currentHealth -= 50;
+                monsterHealthBar.setProgress(currentHealth);
+                monsterHealthNumber.setText(" " + String.valueOf(currentHealth) + "/1000 HP");
+            }
+        });
+        bottomLeftButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // Code here executes on main thread after user presses button
+                currentHealth -= 50;
+                monsterHealthBar.setProgress(currentHealth);
+                monsterHealthNumber.setText(" " + String.valueOf(currentHealth) + "/1000 HP");
+            }
+        });
+        bottomRightButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // Code here executes on main thread after user presses button
                 currentHealth -= 100;
                 monsterHealthBar.setProgress(currentHealth);
                 monsterHealthNumber.setText(" " + String.valueOf(currentHealth) + "/1000 HP");
             }
         });
+
+
+
 
         floatingButtonTopLeft.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -98,6 +133,7 @@ public class ChestActivity extends AppCompatActivity {
                 LayoutInflater inflater = (LayoutInflater)
                         getSystemService(LAYOUT_INFLATER_SERVICE);
                 View popupView = inflater.inflate(R.layout.popup, null);
+                final TextView popupWindowText = popupView.findViewById(R.id.popupText);
 
                 // create the popup window
                 int width = LinearLayout.LayoutParams.WRAP_CONTENT;
@@ -105,17 +141,39 @@ public class ChestActivity extends AppCompatActivity {
                 boolean focusable = true; // lets taps outside the popup also dismiss it
                 final PopupWindow popupWindow = new PopupWindow(popupView, width, height, focusable);
 
+                final String instruction = topLeftButton.getText().toString();
+                switch (instruction){
+                    case "Push Ups":
+                        popupWindowText.setText(pushUpsInstruction);
+                        break;
+                    case "Wide Grip Push Ups":
+                        popupWindowText.setText(wideGripPushUpsInstruction);
+                        break;
+                    case "One Arm Push Ups":
+                        popupWindowText.setText(oneArmPushUpsInstruction);
+                        break;
+                    case "Hands pressing":
+                        popupWindowText.setText(handsPressingInstruction);
+                        break;
+                    case "Incline Push Ups":
+                        popupWindowText.setText(inclinePushUpsInstruction);
+                        break;
+                    case "Decline Push Ups":
+                        popupWindowText.setText(declinePushUpsInstruction);
+                        break;
+                    case "Tension Push Ups":
+                        popupWindowText.setText(tensionPushUpsInstruction);
+                        break;
+                    default:
+                        break;
+                }
+
+
+
                 // show the popup window
                 // which view you pass in doesn't matter, it is only used for the window tolken
                 popupWindow.showAtLocation(v, Gravity.CENTER, 0, 0);
-               //
-                //
-                // die kacke geht nicht
-                //popupText.setText("penis");
-                //
-                //
-                //
-                //
+
                 // dismiss the popup window when touched
                 popupView.setOnTouchListener(new View.OnTouchListener() {
                     @Override
@@ -128,9 +186,185 @@ public class ChestActivity extends AppCompatActivity {
         });
 
 
-       /* floatingButtonTopLeft.setOnClickListener(
-                popup.setText(getResources().getValue(get););
-        );*/
+        floatingButtonTopRight.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                // inflate the layout of the popup window
+                LayoutInflater inflater = (LayoutInflater)
+                        getSystemService(LAYOUT_INFLATER_SERVICE);
+                View popupView = inflater.inflate(R.layout.popup, null);
+                final TextView popupWindowText = popupView.findViewById(R.id.popupText);
+
+                // create the popup window
+                int width = LinearLayout.LayoutParams.WRAP_CONTENT;
+                int height = LinearLayout.LayoutParams.WRAP_CONTENT;
+                boolean focusable = true; // lets taps outside the popup also dismiss it
+                final PopupWindow popupWindow = new PopupWindow(popupView, width, height, focusable);
+
+                final String instruction = topRightButton.getText().toString();
+                switch (instruction){
+                    case "Push Ups":
+                        popupWindowText.setText(pushUpsInstruction);
+                        break;
+                    case "Wide Grip Push Ups":
+                        popupWindowText.setText(wideGripPushUpsInstruction);
+                        break;
+                    case "One Arm Push Ups":
+                        popupWindowText.setText(oneArmPushUpsInstruction);
+                        break;
+                    case "Hands pressing":
+                        popupWindowText.setText(handsPressingInstruction);
+                        break;
+                    case "Incline Push Ups":
+                        popupWindowText.setText(inclinePushUpsInstruction);
+                        break;
+                    case "Decline Push Ups":
+                        popupWindowText.setText(declinePushUpsInstruction);
+                        break;
+                    case "Tension Push Ups":
+                        popupWindowText.setText(tensionPushUpsInstruction);
+                        break;
+                    default:
+                        break;
+                }
+
+
+
+                // show the popup window
+                // which view you pass in doesn't matter, it is only used for the window tolken
+                popupWindow.showAtLocation(v, Gravity.CENTER, 0, 0);
+
+                // dismiss the popup window when touched
+                popupView.setOnTouchListener(new View.OnTouchListener() {
+                    @Override
+                    public boolean onTouch(View v, MotionEvent event) {
+                        popupWindow.dismiss();
+                        return true;
+                    }
+                });
+            }
+        });
+
+        floatingButtonBottomLeft.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                // inflate the layout of the popup window
+                LayoutInflater inflater = (LayoutInflater)
+                        getSystemService(LAYOUT_INFLATER_SERVICE);
+                View popupView = inflater.inflate(R.layout.popup, null);
+                final TextView popupWindowText = popupView.findViewById(R.id.popupText);
+
+                // create the popup window
+                int width = LinearLayout.LayoutParams.WRAP_CONTENT;
+                int height = LinearLayout.LayoutParams.WRAP_CONTENT;
+                boolean focusable = true; // lets taps outside the popup also dismiss it
+                final PopupWindow popupWindow = new PopupWindow(popupView, width, height, focusable);
+
+                final String instruction = bottomLeftButton.getText().toString();
+                switch (instruction){
+                    case "Push Ups":
+                        popupWindowText.setText(pushUpsInstruction);
+                        break;
+                    case "Wide Grip Push Ups":
+                        popupWindowText.setText(wideGripPushUpsInstruction);
+                        break;
+                    case "One Arm Push Ups":
+                        popupWindowText.setText(oneArmPushUpsInstruction);
+                        break;
+                    case "Hands pressing":
+                        popupWindowText.setText(handsPressingInstruction);
+                        break;
+                    case "Incline Push Ups":
+                        popupWindowText.setText(inclinePushUpsInstruction);
+                        break;
+                    case "Decline Push Ups":
+                        popupWindowText.setText(declinePushUpsInstruction);
+                        break;
+                    case "Tension Push Ups":
+                        popupWindowText.setText(tensionPushUpsInstruction);
+                        break;
+                    default:
+                        break;
+                }
+
+
+
+                // show the popup window
+                // which view you pass in doesn't matter, it is only used for the window tolken
+                popupWindow.showAtLocation(v, Gravity.CENTER, 0, 0);
+
+                // dismiss the popup window when touched
+                popupView.setOnTouchListener(new View.OnTouchListener() {
+                    @Override
+                    public boolean onTouch(View v, MotionEvent event) {
+                        popupWindow.dismiss();
+                        return true;
+                    }
+                });
+            }
+        });
+
+        floatingButtonBottomRight.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                // inflate the layout of the popup window
+                LayoutInflater inflater = (LayoutInflater)
+                        getSystemService(LAYOUT_INFLATER_SERVICE);
+                View popupView = inflater.inflate(R.layout.popup, null);
+                final TextView popupWindowText = popupView.findViewById(R.id.popupText);
+
+                // create the popup window
+                int width = LinearLayout.LayoutParams.WRAP_CONTENT;
+                int height = LinearLayout.LayoutParams.WRAP_CONTENT;
+                boolean focusable = true; // lets taps outside the popup also dismiss it
+                final PopupWindow popupWindow = new PopupWindow(popupView, width, height, focusable);
+
+                final String instruction = bottomRightButton.getText().toString();
+                switch (instruction){
+                    case "Push Ups":
+                        popupWindowText.setText(pushUpsInstruction);
+                        break;
+                    case "Wide Grip Push Ups":
+                        popupWindowText.setText(wideGripPushUpsInstruction);
+                        break;
+                    case "One Arm Push Ups":
+                        popupWindowText.setText(oneArmPushUpsInstruction);
+                        break;
+                    case "Hands pressing":
+                        popupWindowText.setText(handsPressingInstruction);
+                        break;
+                    case "Incline Push Ups":
+                        popupWindowText.setText(inclinePushUpsInstruction);
+                        break;
+                    case "Decline Push Ups":
+                        popupWindowText.setText(declinePushUpsInstruction);
+                        break;
+                    case "Tension Push Ups":
+                        popupWindowText.setText(tensionPushUpsInstruction);
+                        break;
+                    default:
+                        break;
+                }
+
+
+
+                // show the popup window
+                // which view you pass in doesn't matter, it is only used for the window tolken
+                popupWindow.showAtLocation(v, Gravity.CENTER, 0, 0);
+
+                // dismiss the popup window when touched
+                popupView.setOnTouchListener(new View.OnTouchListener() {
+                    @Override
+                    public boolean onTouch(View v, MotionEvent event) {
+                        popupWindow.dismiss();
+                        return true;
+                    }
+                });
+            }
+        });
     }
 
 

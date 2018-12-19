@@ -120,8 +120,41 @@
         android:layout_marginTop="12dp"
         android:clickable="true"
         android:focusable="true"
-        app:backgroundTint="@color/colorPrimary"
+        app:backgroundTint="@color/colorPrimaryDark"
         app:layout_constraintStart_toEndOf="@+id/topLeftButton"
         app:layout_constraintTop_toTopOf="@+id/topLeftButton" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/floatingActionButtonTopRight"
+        android:layout_width="21dp"
+        android:layout_height="39dp"
+        android:layout_marginTop="12dp"
+        android:clickable="true"
+        android:focusable="true"
+        app:backgroundTint="@color/colorPrimaryDark"
+        app:layout_constraintEnd_toStartOf="@+id/topRightButton"
+        app:layout_constraintTop_toTopOf="@+id/topRightButton" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/floatingActionButtonBottomLeft"
+        android:layout_width="21dp"
+        android:layout_height="39dp"
+        android:layout_marginTop="12dp"
+        android:clickable="true"
+        android:focusable="true"
+        app:backgroundTint="@color/colorPrimaryDark"
+        app:layout_constraintStart_toEndOf="@+id/bottomLeftButton"
+        app:layout_constraintTop_toTopOf="@+id/bottomLeftButton" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/floatingActionButtonBottomRight"
+        android:layout_width="21dp"
+        android:layout_height="39dp"
+        android:layout_marginTop="12dp"
+        android:clickable="true"
+        android:focusable="true"
+        app:backgroundTint="@color/colorPrimaryDark"
+        app:layout_constraintEnd_toStartOf="@+id/bottomRightButton"
+        app:layout_constraintTop_toTopOf="@+id/bottomRightButton" />
 
 </android.support.constraint.ConstraintLayout>
