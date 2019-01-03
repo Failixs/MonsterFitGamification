@@ -1,22 +1,46 @@
 <resources>
     <string name="app_name">MonsterFit</string>
     <string name="title_activity_main">MainActivity</string>
+    
     <string name="title">Monster Fit</string>
     <string name="startPageLeftButton">Arcade</string>
     <string name="startPageRightButton">VS</string>
+    
     <string name="machomei">Machomei</string>
     <string name="fettsack">Fettsack</string>
     <string name="statistics">Statistiken</string>
-    <string name="Fitsack">Fitsack</string>
+    <string name="fitsack">Fitsack</string>
+    
     <string name="title_activity_scrolling">ScrollingActivity</string>
     <string name="action_settings">Settings</string>
+    
     <string name="killedMonster">Killed Monsters: </string>
-    <string name="DonePushUps">Done Push-Ups: </string>
-    <string name="DoneSitUps">Done Sit-Ups: </string>
-    <string name="DoneLunges">Done Lunges: </string>
+    <string name="donePushUps">Done Push-Ups: </string>
+    <string name="doneSitUps">Done Sit-Ups: </string>
+    <string name="doneLunges">Done Lunges: </string>
     <string name="timeInstalled">Time installed:</string>
-    <string name="PushUps">Push Ups</string>
-    <string name="WideGripPushUps">Wide Grip Push Ups</string>
-    <string name="OneArmPushUps">One Arm Push Ups</string>
-    <string name="HandsPressing">Hands pressing</string>
+    
+    <string name="pushUps">Push Ups</string>
+    <string name="wideGripPushUps">Wide Grip Push Ups</string>
+    <string name="oneArmPushUps">One Arm Push Ups</string>
+    <string name="handsPressing">Hands pressing</string>
+    <string name="inclinePushUps">Incline Push Ups</string>
+    <string name="declinePushUps">Decline Push Ups</string>
+    <string name="tensionPushUps">Tension Push Ups</string>
+
+
+    <string name="pushUpsInstruction">Get into plank position, with your hands under but slightly outside of your shoulders.
+        Lower your body until your chest nearly touches the floor. Pause, then push back to the starting position as quickly as possible.</string>
+    <string name="wideGripPushUpsInstruction">Get into plank position, with your hands as wide apart as you can.
+        Lower your body until your chest nearly touches the floor. Pause, then push back to the starting position as quickly as possible.</string>
+    <string name="oneArmPushUpsInstruction">Push Ups with one Arm you little piece of shit!</string>
+    <string name="handsPressingInstruction">Press your hands against each other at the height of your nipples :D</string>
+    <string name="inclinePushUpsInstruction">The steeper the incline, the less body weight you will need to work push.</string>
+    <string name="declinePushUpsInstruction">What goes up, must come down. These push-ups will help you target your upper chest and deltoid muscles specifically.
+        It will also add more of your body weight to the exercise than a standard push-up, thus making it harder.</string>
+    <string name="tensionPushUpsInstruction">Lowering yourself very slowly (5sec) down into a push-up and pushing back equally as slow into your start position.</string>
+
+
+
+
 </resources>

@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackground"
+    tools:context=".ChestActivity">
+
+    <Button
+        android:id="@+id/bottomLeftButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
+        android:layout_marginBottom="32dp"
+        android:background="@color/colorButton"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/bottomRightButton"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/bottomRightButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="32dp"
+        android:background="@color/colorButton"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/bottomLeftButton" />
+
+    <Button
+        android:id="@+id/topLeftButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
+        android:layout_marginBottom="8dp"
+        android:background="@color/colorButton"
+        app:layout_constraintBottom_toTopOf="@+id/bottomLeftButton"
+        app:layout_constraintEnd_toStartOf="@+id/topRightButton"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/topRightButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="8dp"
+        android:background="@color/colorButton"
+        app:layout_constraintBottom_toTopOf="@+id/bottomRightButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/topLeftButton" />
+
+    <ImageView
+        android:id="@+id/character"
+        android:layout_width="245dp"
+        android:layout_height="215dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginBottom="16dp"
+        android:contentDescription="@string/fitsack"
+        app:layout_constraintBottom_toTopOf="@+id/bottomLeftButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/fit" />
+
+    <ImageView
+        android:id="@+id/monster"
+        android:layout_width="224dp"
+        android:layout_height="208dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:contentDescription="@string/machomei"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/machomei" />
+
+    <ProgressBar
+        android:id="@+id/monsterHealthBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:max="@integer/monsterMaxHealth"
+        android:progress="@integer/monsterMaxHealth"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/monster" />
+
+    <TextView
+        android:id="@+id/monsterHealthNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="1000/1000 HP"
+        android:textColor="@android:color/black"
+        app:layout_constraintBottom_toBottomOf="@+id/monsterHealthBar"
+        app:layout_constraintEnd_toEndOf="@+id/monsterHealthBar"
+        app:layout_constraintStart_toStartOf="@+id/monsterHealthBar" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/floatingActionButtonTopLeft"
+        android:layout_width="21dp"
+        android:layout_height="39dp"
+        android:layout_marginTop="12dp"
+        android:clickable="true"
+        android:focusable="true"
+        app:backgroundTint="@color/colorPrimaryDark"
+        app:layout_constraintStart_toEndOf="@+id/topLeftButton"
+        app:layout_constraintTop_toTopOf="@+id/topLeftButton" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/floatingActionButtonTopRight"
+        android:layout_width="21dp"
+        android:layout_height="39dp"
+        android:layout_marginTop="12dp"
+        android:clickable="true"
+        android:focusable="true"
+        app:backgroundTint="@color/colorPrimaryDark"
+        app:layout_constraintEnd_toStartOf="@+id/topRightButton"
+        app:layout_constraintTop_toTopOf="@+id/topRightButton" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/floatingActionButtonBottomLeft"
+        android:layout_width="21dp"
+        android:layout_height="39dp"
+        android:layout_marginTop="12dp"
+        android:clickable="true"
+        android:focusable="true"
+        app:backgroundTint="@color/colorPrimaryDark"
+        app:layout_constraintStart_toEndOf="@+id/bottomLeftButton"
+        app:layout_constraintTop_toTopOf="@+id/bottomLeftButton" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/floatingActionButtonBottomRight"
+        android:layout_width="21dp"
+        android:layout_height="39dp"
+        android:layout_marginTop="12dp"
+        android:clickable="true"
+        android:focusable="true"
+        app:backgroundTint="@color/colorPrimaryDark"
+        app:layout_constraintEnd_toStartOf="@+id/bottomRightButton"
+        app:layout_constraintTop_toTopOf="@+id/bottomRightButton" />
+
+</android.support.constraint.ConstraintLayout>
