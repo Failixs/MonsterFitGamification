@@ -13,7 +13,7 @@ public class ChooseTrainingActivity extends AppCompatActivity {
         setContentView(R.layout.activity_choose_training);
     }
 
-    public void changeViewToChestActivity(View v){
-        startActivity(new Intent(this, ChestActivity.class));
+    public void changeViewToTrainingActivity(View v){
+        startActivity(new Intent(this, TrainingActivity.class).putExtra("tag", v.getTag().toString()));
     }
 }

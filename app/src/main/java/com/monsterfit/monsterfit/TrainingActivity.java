@@ -1,7 +1,5 @@
 package com.monsterfit.monsterfit;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -10,15 +8,13 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.support.design.widget.FloatingActionButton;
 import android.widget.Button;
-import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import java.util.Random;
-
-public class ChestActivity extends AppCompatActivity {
+public class TrainingActivity extends AppCompatActivity {
 
 
     public int maxHealth = 1000;
@@ -28,8 +24,8 @@ public class ChestActivity extends AppCompatActivity {
 
     //function to create random number from 0 to max
     public int random(int max){
-        int tmp = 0;
-        tmp = 0 + (int)(Math.random() * ((max - 1) + 1));
+        int tmp;
+        tmp = (int)(Math.random() * ((max - 1) + 1));
         return tmp;
     }
 
@@ -37,7 +33,28 @@ public class ChestActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_chest_training);
+        setContentView(R.layout.activity_training);
+
+
+        Bundle b = getIntent().getExtras();
+        String tag = "test"; // or other values
+        if(b != null)
+            tag = b.getString("tag");
+
+        ImageView monster = findViewById(R.id.monster);
+        switch(tag){
+            case "leg":
+                monster.setImageResource(R.drawable.kicklee);
+                break;
+            case "chest":
+                monster.setImageResource(R.drawable.machomei);
+                break;
+            default:
+                monster.setImageResource(R.drawable.machomei);
+                break;
+        }
+
+
 
 
         //strings

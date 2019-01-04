@@ -17,7 +17,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".ChooseTrainingActivity" />
-        <activity android:name=".ChestActivity" />
+        <activity android:name=".TrainingActivity" />
     </application>
 
 </manifest>
