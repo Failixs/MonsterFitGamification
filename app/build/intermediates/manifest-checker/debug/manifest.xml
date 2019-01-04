@@ -26,7 +26,7 @@
             </intent-filter>
         </activity>
         <activity android:name="com.monsterfit.monsterfit.ChooseTrainingActivity" />
-        <activity android:name="com.monsterfit.monsterfit.ChestActivity" />
+        <activity android:name="com.monsterfit.monsterfit.TrainingActivity" />
 
         <provider
             android:name="com.android.tools.ir.server.InstantRunContentProvider"
