@@ -14,375 +14,174 @@ import android.widget.PopupWindow;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.monsterfit.monsterfit.database.DatabaseHelper;
+import com.monsterfit.monsterfit.database.Exercise;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class TrainingActivity extends AppCompatActivity {
 
 
-    public int maxHealth = 1000;
-    public int currentHealth;
+    //TODO: Get maxHealth from defeated enemies
+    private int maxHealth = 1000;
+    private int currentHealth;
 
+    private Exercise.TYPE tag;
+    private Exercise[] selectedExercises;
 
-
-    //function to create random number from 0 to max
-    public int random(int max){
-        int tmp;
-        tmp = (int)(Math.random() * ((max - 1) + 1));
-        return tmp;
-    }
-
+    private ProgressBar monsterHealthBar;
+    private TextView monsterHealthNumber;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_training);
 
+        this.tag = getTag();
+        setMonsterImageView();
+        List<Exercise> exerciseList = getExerciseListByType();
+        selectedExercises = getSelectedExercises(exerciseList);
 
+        //buttons,bars etc.
+
+        monsterHealthBar = findViewById(R.id.monsterHealthBar);
+        monsterHealthNumber = findViewById(R.id.monsterHealthNumber);
+
+
+        final Button topLeftButton = findViewById(R.id.topLeftButton);
+        final Button topRightButton = findViewById(R.id.topRightButton);
+        final Button bottomLeftButton = findViewById(R.id.bottomLeftButton);
+        final Button bottomRightButton = findViewById(R.id.bottomRightButton);
+
+        topLeftButton.setText(selectedExercises[0].getRepetitions() + "x " + selectedExercises[0].getTitle());
+        topRightButton.setText(selectedExercises[1].getRepetitions() + "x " + selectedExercises[1].getTitle());
+        bottomLeftButton.setText(selectedExercises[2].getRepetitions() + "x " + selectedExercises[2].getTitle());
+        bottomRightButton.setText(selectedExercises[3].getRepetitions() + "x " + selectedExercises[3].getTitle());
+
+        monsterHealthBar.setMax(maxHealth);
+        currentHealth = maxHealth;
+    }
+
+    public void instructionClick(View v){
+        Exercise exerciseDone = selectedExercises[Integer.valueOf(v.getTag().toString())];
+
+        // inflate the layout of the popup window
+        LayoutInflater inflater = (LayoutInflater)
+                getSystemService(LAYOUT_INFLATER_SERVICE);
+        View popupView = inflater.inflate(R.layout.popup, null);
+        final TextView popupWindowText = popupView.findViewById(R.id.popupText);
+
+        // create the popup window
+        int width = LinearLayout.LayoutParams.WRAP_CONTENT;
+        int height = LinearLayout.LayoutParams.WRAP_CONTENT;
+        boolean focusable = true; // lets taps outside the popup also dismiss it
+        final PopupWindow popupWindow = new PopupWindow(popupView, width, height, focusable);
+
+        popupWindowText.setText(exerciseDone.getInstruction());
+
+        // show the popup window
+        // which view you pass in doesn't matter, it is only used for the window tolken
+        popupWindow.showAtLocation(v, Gravity.CENTER, 0, 0);
+
+        // dismiss the popup window when touched
+        popupView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                popupWindow.dismiss();
+                return true;
+            }
+        });
+    }
+
+    public void trainingDoneClick(View v){
+        Exercise exerciseDone = selectedExercises[Integer.valueOf(v.getTag().toString())];
+        currentHealth = Math.max(0, currentHealth - exerciseDone.getDifficulty() * exerciseDone.getRepetitions());
+
+        monsterHealthBar.setProgress(currentHealth);
+        monsterHealthNumber.setText(" " + String.valueOf(currentHealth) + "/" + String.valueOf(maxHealth) + "HP");
+    }
+
+    /**
+     * Gets the tag (Training type) from the intent
+     * @return training type
+     */
+    private Exercise.TYPE getTag(){
         Bundle b = getIntent().getExtras();
-        String tag = "test"; // or other values
+        String tag = "ARMS"; // or other values
         if(b != null)
             tag = b.getString("tag");
+        return Exercise.TYPE.valueOf(tag);
+    }
 
+    //TODO: Change drawings
+    /**
+     * Sets the enemy monster image considering the tag
+     */
+    private void setMonsterImageView(){
         ImageView monster = findViewById(R.id.monster);
         switch(tag){
-            case "leg":
+            case LEGS:
                 monster.setImageResource(R.drawable.kicklee);
                 break;
-            case "chest":
+            case CHEST:
+                monster.setImageResource(R.drawable.machomei);
+                break;
+            case ARMS:
                 monster.setImageResource(R.drawable.machomei);
                 break;
             default:
                 monster.setImageResource(R.drawable.machomei);
                 break;
         }
-
-
-
-
-        //strings
-        final String pushUps = getString(R.string.pushUps);
-        final String wideGripPushUps = getString(R.string.wideGripPushUps);
-        final String handsPressing = getString(R.string.handsPressing);
-        final String oneArmPushUps = getString(R.string.oneArmPushUps);
-        final String inclinePushUps = getString(R.string.inclinePushUps);
-        final String declinePushUps = getString(R.string.declinePushUps);
-        final String tensionPushUps = getString(R.string.tensionPushUps);
-
-        final String pushUpsInstruction = getString(R.string.pushUpsInstruction);
-        final String wideGripPushUpsInstruction = getString(R.string.wideGripPushUpsInstruction);
-        final String handsPressingInstruction = getString(R.string.handsPressingInstruction);
-        final String oneArmPushUpsInstruction = getString(R.string.oneArmPushUpsInstruction);
-        final String inclinePushUpsInstruction = getString(R.string.inclinePushUpsInstruction);
-        final String declinePushUpsInstruction = getString(R.string.declinePushUpsInstruction);
-        final String tensionPushUpsInstruction = getString(R.string.tensionPushUpsInstruction);
-
-        final String exercisesEasy[] = {pushUps,handsPressing,inclinePushUps};
-        final String exercisesMiddle[] = {pushUps,tensionPushUps,wideGripPushUps};
-        final String exercisesHard[] = {oneArmPushUps,declinePushUps,wideGripPushUps};
-
-        //buttons,bars etc.
-        final ProgressBar monsterHealthBar = findViewById(R.id.monsterHealthBar);
-        final TextView monsterHealthNumber = findViewById(R.id.monsterHealthNumber);
-        final Button topLeftButton = findViewById(R.id.topLeftButton);
-        final Button topRightButton = findViewById(R.id.topRightButton);
-        final Button bottomLeftButton = findViewById(R.id.bottomLeftButton);
-        final Button bottomRightButton = findViewById(R.id.bottomRightButton);
-        final FloatingActionButton floatingButtonTopLeft = findViewById(R.id.floatingActionButtonTopLeft);
-        final FloatingActionButton floatingButtonTopRight = findViewById(R.id.floatingActionButtonTopRight);
-        final FloatingActionButton floatingButtonBottomLeft = findViewById(R.id.floatingActionButtonBottomLeft);
-        final FloatingActionButton floatingButtonBottomRight = findViewById(R.id.floatingActionButtonBottomRight);
-
-
-        monsterHealthBar.setMax(maxHealth);
-        currentHealth = maxHealth;
-
-
-        //initialize random buttons
-        topLeftButton.setText(exercisesEasy[random(exercisesEasy.length)]);
-        topRightButton.setText(exercisesMiddle[random(exercisesEasy.length)]);
-        bottomLeftButton.setText(exercisesMiddle[random(exercisesEasy.length)]);
-        bottomRightButton.setText(exercisesHard[random(exercisesEasy.length)]);
-
-
-
-
-
-
-        topLeftButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                // Code here executes on main thread after user presses button
-                currentHealth -= 25;
-                monsterHealthBar.setProgress(currentHealth);
-                monsterHealthNumber.setText(" " + String.valueOf(currentHealth) + "/1000 HP");
-            }
-        });
-        topRightButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                // Code here executes on main thread after user presses button
-                currentHealth -= 50;
-                monsterHealthBar.setProgress(currentHealth);
-                monsterHealthNumber.setText(" " + String.valueOf(currentHealth) + "/1000 HP");
-            }
-        });
-        bottomLeftButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                // Code here executes on main thread after user presses button
-                currentHealth -= 50;
-                monsterHealthBar.setProgress(currentHealth);
-                monsterHealthNumber.setText(" " + String.valueOf(currentHealth) + "/1000 HP");
-            }
-        });
-        bottomRightButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                // Code here executes on main thread after user presses button
-                currentHealth -= 100;
-                monsterHealthBar.setProgress(currentHealth);
-                monsterHealthNumber.setText(" " + String.valueOf(currentHealth) + "/1000 HP");
-            }
-        });
-
-
-
-
-        floatingButtonTopLeft.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                // inflate the layout of the popup window
-                LayoutInflater inflater = (LayoutInflater)
-                        getSystemService(LAYOUT_INFLATER_SERVICE);
-                View popupView = inflater.inflate(R.layout.popup, null);
-                final TextView popupWindowText = popupView.findViewById(R.id.popupText);
-
-                // create the popup window
-                int width = LinearLayout.LayoutParams.WRAP_CONTENT;
-                int height = LinearLayout.LayoutParams.WRAP_CONTENT;
-                boolean focusable = true; // lets taps outside the popup also dismiss it
-                final PopupWindow popupWindow = new PopupWindow(popupView, width, height, focusable);
-
-                final String instruction = topLeftButton.getText().toString();
-                switch (instruction){
-                    case "Push Ups":
-                        popupWindowText.setText(pushUpsInstruction);
-                        break;
-                    case "Wide Grip Push Ups":
-                        popupWindowText.setText(wideGripPushUpsInstruction);
-                        break;
-                    case "One Arm Push Ups":
-                        popupWindowText.setText(oneArmPushUpsInstruction);
-                        break;
-                    case "Hands pressing":
-                        popupWindowText.setText(handsPressingInstruction);
-                        break;
-                    case "Incline Push Ups":
-                        popupWindowText.setText(inclinePushUpsInstruction);
-                        break;
-                    case "Decline Push Ups":
-                        popupWindowText.setText(declinePushUpsInstruction);
-                        break;
-                    case "Tension Push Ups":
-                        popupWindowText.setText(tensionPushUpsInstruction);
-                        break;
-                    default:
-                        break;
-                }
-
-
-
-                // show the popup window
-                // which view you pass in doesn't matter, it is only used for the window tolken
-                popupWindow.showAtLocation(v, Gravity.CENTER, 0, 0);
-
-                // dismiss the popup window when touched
-                popupView.setOnTouchListener(new View.OnTouchListener() {
-                    @Override
-                    public boolean onTouch(View v, MotionEvent event) {
-                        popupWindow.dismiss();
-                        return true;
-                    }
-                });
-            }
-        });
-
-
-        floatingButtonTopRight.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                // inflate the layout of the popup window
-                LayoutInflater inflater = (LayoutInflater)
-                        getSystemService(LAYOUT_INFLATER_SERVICE);
-                View popupView = inflater.inflate(R.layout.popup, null);
-                final TextView popupWindowText = popupView.findViewById(R.id.popupText);
-
-                // create the popup window
-                int width = LinearLayout.LayoutParams.WRAP_CONTENT;
-                int height = LinearLayout.LayoutParams.WRAP_CONTENT;
-                boolean focusable = true; // lets taps outside the popup also dismiss it
-                final PopupWindow popupWindow = new PopupWindow(popupView, width, height, focusable);
-
-                final String instruction = topRightButton.getText().toString();
-                switch (instruction){
-                    case "Push Ups":
-                        popupWindowText.setText(pushUpsInstruction);
-                        break;
-                    case "Wide Grip Push Ups":
-                        popupWindowText.setText(wideGripPushUpsInstruction);
-                        break;
-                    case "One Arm Push Ups":
-                        popupWindowText.setText(oneArmPushUpsInstruction);
-                        break;
-                    case "Hands pressing":
-                        popupWindowText.setText(handsPressingInstruction);
-                        break;
-                    case "Incline Push Ups":
-                        popupWindowText.setText(inclinePushUpsInstruction);
-                        break;
-                    case "Decline Push Ups":
-                        popupWindowText.setText(declinePushUpsInstruction);
-                        break;
-                    case "Tension Push Ups":
-                        popupWindowText.setText(tensionPushUpsInstruction);
-                        break;
-                    default:
-                        break;
-                }
-
-
-
-                // show the popup window
-                // which view you pass in doesn't matter, it is only used for the window tolken
-                popupWindow.showAtLocation(v, Gravity.CENTER, 0, 0);
-
-                // dismiss the popup window when touched
-                popupView.setOnTouchListener(new View.OnTouchListener() {
-                    @Override
-                    public boolean onTouch(View v, MotionEvent event) {
-                        popupWindow.dismiss();
-                        return true;
-                    }
-                });
-            }
-        });
-
-        floatingButtonBottomLeft.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                // inflate the layout of the popup window
-                LayoutInflater inflater = (LayoutInflater)
-                        getSystemService(LAYOUT_INFLATER_SERVICE);
-                View popupView = inflater.inflate(R.layout.popup, null);
-                final TextView popupWindowText = popupView.findViewById(R.id.popupText);
-
-                // create the popup window
-                int width = LinearLayout.LayoutParams.WRAP_CONTENT;
-                int height = LinearLayout.LayoutParams.WRAP_CONTENT;
-                boolean focusable = true; // lets taps outside the popup also dismiss it
-                final PopupWindow popupWindow = new PopupWindow(popupView, width, height, focusable);
-
-                final String instruction = bottomLeftButton.getText().toString();
-                switch (instruction){
-                    case "Push Ups":
-                        popupWindowText.setText(pushUpsInstruction);
-                        break;
-                    case "Wide Grip Push Ups":
-                        popupWindowText.setText(wideGripPushUpsInstruction);
-                        break;
-                    case "One Arm Push Ups":
-                        popupWindowText.setText(oneArmPushUpsInstruction);
-                        break;
-                    case "Hands pressing":
-                        popupWindowText.setText(handsPressingInstruction);
-                        break;
-                    case "Incline Push Ups":
-                        popupWindowText.setText(inclinePushUpsInstruction);
-                        break;
-                    case "Decline Push Ups":
-                        popupWindowText.setText(declinePushUpsInstruction);
-                        break;
-                    case "Tension Push Ups":
-                        popupWindowText.setText(tensionPushUpsInstruction);
-                        break;
-                    default:
-                        break;
-                }
-
-
-
-                // show the popup window
-                // which view you pass in doesn't matter, it is only used for the window tolken
-                popupWindow.showAtLocation(v, Gravity.CENTER, 0, 0);
-
-                // dismiss the popup window when touched
-                popupView.setOnTouchListener(new View.OnTouchListener() {
-                    @Override
-                    public boolean onTouch(View v, MotionEvent event) {
-                        popupWindow.dismiss();
-                        return true;
-                    }
-                });
-            }
-        });
-
-        floatingButtonBottomRight.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                // inflate the layout of the popup window
-                LayoutInflater inflater = (LayoutInflater)
-                        getSystemService(LAYOUT_INFLATER_SERVICE);
-                View popupView = inflater.inflate(R.layout.popup, null);
-                final TextView popupWindowText = popupView.findViewById(R.id.popupText);
-
-                // create the popup window
-                int width = LinearLayout.LayoutParams.WRAP_CONTENT;
-                int height = LinearLayout.LayoutParams.WRAP_CONTENT;
-                boolean focusable = true; // lets taps outside the popup also dismiss it
-                final PopupWindow popupWindow = new PopupWindow(popupView, width, height, focusable);
-
-                final String instruction = bottomRightButton.getText().toString();
-                switch (instruction){
-                    case "Push Ups":
-                        popupWindowText.setText(pushUpsInstruction);
-                        break;
-                    case "Wide Grip Push Ups":
-                        popupWindowText.setText(wideGripPushUpsInstruction);
-                        break;
-                    case "One Arm Push Ups":
-                        popupWindowText.setText(oneArmPushUpsInstruction);
-                        break;
-                    case "Hands pressing":
-                        popupWindowText.setText(handsPressingInstruction);
-                        break;
-                    case "Incline Push Ups":
-                        popupWindowText.setText(inclinePushUpsInstruction);
-                        break;
-                    case "Decline Push Ups":
-                        popupWindowText.setText(declinePushUpsInstruction);
-                        break;
-                    case "Tension Push Ups":
-                        popupWindowText.setText(tensionPushUpsInstruction);
-                        break;
-                    default:
-                        break;
-                }
-
-
-
-                // show the popup window
-                // which view you pass in doesn't matter, it is only used for the window tolken
-                popupWindow.showAtLocation(v, Gravity.CENTER, 0, 0);
-
-                // dismiss the popup window when touched
-                popupView.setOnTouchListener(new View.OnTouchListener() {
-                    @Override
-                    public boolean onTouch(View v, MotionEvent event) {
-                        popupWindow.dismiss();
-                        return true;
-                    }
-                });
-            }
-        });
     }
 
+    /**
+     * Gets all exercises from database with the tag as exercise type
+     * @return exerciseList
+     */
+    private List<Exercise> getExerciseListByType(){
+        List<Exercise> exerciseList = new ArrayList<>();
+        DatabaseHelper db = new DatabaseHelper(this);
+        exerciseList = db.getExerciseByType(this.tag);
+        return exerciseList;
+    }
 
+    /**
+     * Chooses randomly four Exercises of different levels of difficulty
+     * @param exerciseList
+     * @return array of four selected exercises
+     */
+    private Exercise[] getSelectedExercises(List<Exercise> exerciseList){
+        Exercise[] selectedExercises = new Exercise[4];
+        for(int i = 0; i < 4; i++){
+            selectedExercises[i] = getExercise(exerciseList, 6 - i);
+        }
+        return  selectedExercises;
+    }
+
+    /**
+     * Selects randomly an exercise out of the given list
+     * when monster can be defeated with iterationsToDo iterations.
+     * @param exerciseList list to be selected from
+     * @param iterationsToDo level of difficulty (higher = easier)
+     * @return an exercise of the given level of difficulty
+     */
+    private Exercise getExercise(List<Exercise> exerciseList, int iterationsToDo){
+        if(exerciseList.size() > 0) {
+            Exercise randomExercise = exerciseList.get((int) (Math.random() * exerciseList.size()));
+            Exercise exercise = new Exercise(randomExercise.getId(), randomExercise.getTitle(), randomExercise.getType(),randomExercise.getInstruction(),randomExercise.getDifficulty()); //randomExercise needs to be copied here!
+            if (4 * exercise.getDifficulty() >= maxHealth / iterationsToDo)
+                getExercise(exerciseList, iterationsToDo); // Chosen exercise too difficult
+            else {
+                int rep = 5;
+                while (rep * exercise.getDifficulty() < maxHealth / iterationsToDo) {
+                    rep++;
+                }
+                exercise.setRepetitions(rep);
+            }
+            return exercise;
+        }
+        return null;
+    }
 }

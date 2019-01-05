@@ -9,6 +9,8 @@
 
     <Button
         android:id="@+id/bottomLeftButton"
+        android:onClick="trainingDoneClick"
+        android:tag="2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -23,6 +25,8 @@
 
     <Button
         android:id="@+id/bottomRightButton"
+        android:onClick="trainingDoneClick"
+        android:tag="3"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -37,6 +41,8 @@
 
     <Button
         android:id="@+id/topLeftButton"
+        android:onClick="trainingDoneClick"
+        android:tag="0"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -51,6 +57,8 @@
 
     <Button
         android:id="@+id/topRightButton"
+        android:onClick="trainingDoneClick"
+        android:tag="1"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -115,6 +123,8 @@
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/floatingActionButtonTopLeft"
+        android:onClick="instructionClick"
+        android:tag="0"
         android:layout_width="21dp"
         android:layout_height="39dp"
         android:layout_marginTop="12dp"
@@ -126,6 +136,8 @@
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/floatingActionButtonTopRight"
+        android:onClick="instructionClick"
+        android:tag="1"
         android:layout_width="21dp"
         android:layout_height="39dp"
         android:layout_marginTop="12dp"
@@ -137,6 +149,8 @@
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/floatingActionButtonBottomLeft"
+        android:onClick="instructionClick"
+        android:tag="2"
         android:layout_width="21dp"
         android:layout_height="39dp"
         android:layout_marginTop="12dp"
@@ -148,6 +162,8 @@
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/floatingActionButtonBottomRight"
+        android:onClick="instructionClick"
+        android:tag="3"
         android:layout_width="21dp"
         android:layout_height="39dp"
         android:layout_marginTop="12dp"
