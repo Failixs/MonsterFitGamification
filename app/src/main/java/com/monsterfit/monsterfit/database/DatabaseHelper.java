@@ -25,12 +25,25 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     // Creating Tables
     @Override
     public void onCreate(SQLiteDatabase db) {
+        createExerciseTable(db);
+        createScoreTable(db);
+    }
 
+    private void createExerciseTable(SQLiteDatabase db){
         // create notes table
         db.execSQL(Exercise.CREATE_TABLE);
         insertExercise(db, "Liegestütz", Exercise.TYPE.ARMS, "Die Hände befinden sich etwas über schulterbreit voneinander entfernt am Boden. Die Finger zeigen nach vorne, die Daumen nach innen. Durch gleichzeitiges Anspannen der Arme werden diese gestreckt und der Oberkörper hebt vom Boden ab. Das Gewicht wird gleichmäßig auf Zehenspitzen und Händen verteilt. Kopf, Hals, Wirbelsäule, Gesäß und Knie bilden eine Linie und die Bauchmuskulatur ist angespannt. Nun werden beide Arme gleichzeitig gebeugt und der Oberkörper somit abgesenkt, bis die Nasenspitze fast den Boden berührt. Der Körper bleibt dabei gestreckt.", 10);
         insertExercise(db, "Liegestütz", Exercise.TYPE.LEGS, "Die Hände befinden sich etwas über schulterbreit voneinander entfernt am Boden. Die Finger zeigen nach vorne, die Daumen nach innen. Durch gleichzeitiges Anspannen der Arme werden diese gestreckt und der Oberkörper hebt vom Boden ab. Das Gewicht wird gleichmäßig auf Zehenspitzen und Händen verteilt. Kopf, Hals, Wirbelsäule, Gesäß und Knie bilden eine Linie und die Bauchmuskulatur ist angespannt. Nun werden beide Arme gleichzeitig gebeugt und der Oberkörper somit abgesenkt, bis die Nasenspitze fast den Boden berührt. Der Körper bleibt dabei gestreckt.", 1);
         insertExercise(db, "Liegestütz", Exercise.TYPE.CHEST, "Die Hände befinden sich etwas über schulterbreit voneinander entfernt am Boden. Die Finger zeigen nach vorne, die Daumen nach innen. Durch gleichzeitiges Anspannen der Arme werden diese gestreckt und der Oberkörper hebt vom Boden ab. Das Gewicht wird gleichmäßig auf Zehenspitzen und Händen verteilt. Kopf, Hals, Wirbelsäule, Gesäß und Knie bilden eine Linie und die Bauchmuskulatur ist angespannt. Nun werden beide Arme gleichzeitig gebeugt und der Oberkörper somit abgesenkt, bis die Nasenspitze fast den Boden berührt. Der Körper bleibt dabei gestreckt.", 10);
+    }
+
+    private void createScoreTable(SQLiteDatabase db){
+        db.execSQL(Score.CREATE_TABLE);
+        insertScore(db, Score.TIME_INSTALLED, System.currentTimeMillis());
+        insertScore(db, Score.TIME_WORKED_OUT, 0);
+        insertScore(db, Score.KILLED_ARM_MONSTERS, 0);
+        insertScore(db, Score.KILLED_CHEST_MONSTERS, 0);
+        insertScore(db, Score.KILLED_LEG_MONSTERS, 0);
     }
 
     // Upgrading database
@@ -40,9 +53,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + Exercise.TABLE_NAME);
 
         // Create tables again
-        onCreate(db);
+        createExerciseTable(db);
     }
 
+    // Methods for exercises
     private void insertExercise(SQLiteDatabase db, String title, Exercise.TYPE type, String instruction, int difficulty){
         ContentValues values = new ContentValues();
         values.put("title", title);
@@ -91,6 +105,34 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 + "='" + type.name() + "';";
 
         return db.rawQuery(selectQuery, null);
+    }
+
+    // Methods for scores
+    private void insertScore(SQLiteDatabase db, String description, long score){
+        ContentValues values = new ContentValues();
+        values.put("description", description);
+        values.put("score", score);
+        db.insert(Score.TABLE_NAME, null, values);
+    }
+
+    public Score getScore (String description){
+        String selectQuery = "SELECT * FROM " + Score.TABLE_NAME
+                + " WHERE " + Score.COLUMN_DESCRIPTION
+                + "='" + description + "';";
+
+        Score score = new Score();
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        if(cursor.moveToFirst()){
+                score = new Score(cursor.getInt(cursor.getColumnIndex(Score.COLUMN_ID)),
+                        cursor.getString(cursor.getColumnIndex(Score.COLUMN_DESCRIPTION)),
+                        cursor.getLong(cursor.getColumnIndex(Score.COLUMN_SCORE)));
+        }
+
+        db.close();
+
+        return score;
     }
 
 

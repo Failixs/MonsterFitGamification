@@ -10,15 +10,19 @@
     <string name="fettsack">Fettsack</string>
     <string name="statistics">Statistiken</string>
     <string name="fitsack">Fitsack</string>
-    
-    <string name="title_activity_scrolling">ScrollingActivity</string>
+
     <string name="action_settings">Settings</string>
-    
-    <string name="killedMonster">Killed Monsters: </string>
-    <string name="donePushUps">Done Push-Ups: </string>
-    <string name="doneSitUps">Done Sit-Ups: </string>
-    <string name="doneLunges">Done Lunges: </string>
-    <string name="timeInstalled">Time installed:</string>
+
+    <string name="timeInstalled">Installiert seit:</string>
+    <string name="timeWorkedOut">Workeout-Zeit:</string>
+    <string name="killedArmMonster">Arm Monster besiegt:</string>
+    <string name="killedChestMonster">Brust Monster besiegt:</string>
+    <string name="killedLegMonster">Bein Monster besiegt:</string>
+
+
+
+
+
     
     <string name="pushUps">Push Ups</string>
     <string name="wideGripPushUps">Wide Grip Push Ups</string>

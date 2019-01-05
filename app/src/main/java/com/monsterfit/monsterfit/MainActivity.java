@@ -20,6 +20,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.monsterfit.monsterfit.database.DatabaseHelper;
+import com.monsterfit.monsterfit.database.Score;
+
 import java.io.File;
 
 public class MainActivity extends AppCompatActivity {
@@ -31,6 +34,16 @@ public class MainActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_main);
 
+        setLayout();
+
+        setStatistics();
+    }
+
+    /**
+     * Sets the layout of the starting page:
+     * Image and Buttons take the whole page, statistics follow beneath
+     */
+    private void setLayout(){
         // Get height of the display for layout issues
         Display display = getWindowManager().getDefaultDisplay();
         Point size = new Point();
@@ -57,26 +70,66 @@ public class MainActivity extends AppCompatActivity {
         params.height = (int)Math.ceil(height * 0.2);
         startPageButtons.setLayoutParams(new LinearLayout.LayoutParams(params));
         startPageButtons.invalidate();
+    }
 
+    private void setStatistics(){
 
-        //TextView timeInstalled = (TextView) findViewById(R.id.timeInstalledValue);
-        //timeInstalled.setText(installedTime);
+        DatabaseHelper db = new DatabaseHelper(this);
+
+        // Time installed
+        long score = db.getScore(Score.TIME_INSTALLED).getScore();
+        long difference = System.currentTimeMillis() - score;
+        int dayCount = (int)(difference / 86400000);
+        String days = dayCount > 0 ? String.valueOf(dayCount) + " Tage, " : "";
+        difference %= 86400000;
+        int hourCount = (int)(difference / 3600000);
+        String hours = hourCount > 0 ? String.valueOf(hourCount) + " Stunden, " : "";
+        difference %= 3600000;
+        int minuteCount = (int)(difference / 60000);
+        String minutes = minuteCount > 0 ? String.valueOf(minuteCount) + " Minuten, " : "";
+        difference %= 60000;
+        int secondCount = (int)(difference / 1000);
+        String seconds = String.valueOf(secondCount) + " Sekunden.";
+
+        //TODO Minutes and Seconds only for testing issues
+        TextView timeInstalled = findViewById(R.id.timeInstalled);
+        timeInstalled.setText(days + hours + minutes + seconds);
+
+        // Worked out time
+        score = db.getScore(Score.TIME_WORKED_OUT).getScore();
+
+        dayCount = (int)(score / 86400000);
+        days = dayCount > 0 ? String.valueOf(dayCount) + " Tage, " : "";
+        score %= 86400000;
+        hourCount = (int)(score / 3600000);
+        hours = hourCount > 0 ? String.valueOf(hourCount) + " Stunden, " : "";
+        score %= 3600000;
+        minuteCount = (int)(score / 60000);
+        minutes = minuteCount > 0 ? String.valueOf(minuteCount) + " Minuten, " : "";
+        score %= 60000;
+        secondCount = (int)(score / 1000);
+        seconds = String.valueOf(secondCount) + " Sekunden.";
+
+        TextView timeWorkedOut = findViewById(R.id.timeWorkedOut);
+        timeWorkedOut.setText(days + hours + minutes + seconds);
+
+        // Killed arm monsters
+        score = db.getScore(Score.KILLED_ARM_MONSTERS).getScore();
+        TextView killedArmMonsters = findViewById(R.id.killedArmMonster);
+        killedArmMonsters.setText(String.valueOf(score));
+
+        // Killed chest monsters
+        score = db.getScore(Score.KILLED_CHEST_MONSTERS).getScore();
+        TextView killedChestMonsters = findViewById(R.id.killedChestMonster);
+        killedChestMonsters.setText(String.valueOf(score));
+
+        // Killed leg monsters
+        score = db.getScore(Score.KILLED_LEG_MONSTERS).getScore();
+        TextView killedLegMonsters = findViewById(R.id.killedLegMonster);
+        killedLegMonsters.setText(String.valueOf(score));
     }
 
     public void changeViewToMonsterSelection(View v){
         startActivity(new Intent(this, ChooseTrainingActivity.class));
     }
-
-   /* public long daysInstalled(){
-        long installed = 0;
-        try{
-            long installedTime = this.getPackageManager().getPackageInfo("com.monsterfit.monsterfit", 0).firstInstallTime;
-            installed = installedTime;
-            PackageManager pm = this.getPackageManager();
-            PackageInfo packInfo = pm.getPackageInfo("com.monsterfit.monsterfit", 0);
-            installed = packInfo.firstInstallTime;
-        }catch (PackageManager.NameNotFoundException e){
-        }
-        return installed;
-    }*/
 }
