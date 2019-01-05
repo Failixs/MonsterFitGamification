@@ -80,35 +80,28 @@ public class MainActivity extends AppCompatActivity {
         long score = db.getScore(Score.TIME_INSTALLED).getScore();
         long difference = System.currentTimeMillis() - score;
         int dayCount = (int)(difference / 86400000);
-        String days = dayCount > 0 ? String.valueOf(dayCount) + " Tage, " : "";
+        String days = (dayCount <= 0) ? "" : String.valueOf(dayCount) + " Tag" + ((dayCount == 1) ? ", " : "e, ");
         difference %= 86400000;
         int hourCount = (int)(difference / 3600000);
-        String hours = hourCount > 0 ? String.valueOf(hourCount) + " Stunden, " : "";
-        difference %= 3600000;
-        int minuteCount = (int)(difference / 60000);
-        String minutes = minuteCount > 0 ? String.valueOf(minuteCount) + " Minuten, " : "";
-        difference %= 60000;
-        int secondCount = (int)(difference / 1000);
-        String seconds = String.valueOf(secondCount) + " Sekunden.";
+        String hours = String.valueOf(hourCount) + " Stunde"  + ((hourCount == 1) ? "" : "n");
 
-        //TODO Minutes and Seconds only for testing issues
         TextView timeInstalled = findViewById(R.id.timeInstalled);
-        timeInstalled.setText(days + hours + minutes + seconds);
+        timeInstalled.setText(days + hours);
 
         // Worked out time
         score = db.getScore(Score.TIME_WORKED_OUT).getScore();
 
         dayCount = (int)(score / 86400000);
-        days = dayCount > 0 ? String.valueOf(dayCount) + " Tage, " : "";
+        days = (dayCount <= 0) ? "" : String.valueOf(dayCount) + " Tag" + ((dayCount == 1) ? ", " : "e, ");
         score %= 86400000;
         hourCount = (int)(score / 3600000);
-        hours = hourCount > 0 ? String.valueOf(hourCount) + " Stunden, " : "";
+        hours = (hourCount <= 0) ? "" : String.valueOf(hourCount) + " Stunde" + ((hourCount == 1) ? ", " : "n, ");
         score %= 3600000;
-        minuteCount = (int)(score / 60000);
-        minutes = minuteCount > 0 ? String.valueOf(minuteCount) + " Minuten, " : "";
+        int minuteCount = (int)(score / 60000);
+        String minutes = (minuteCount <= 0) ? "" : String.valueOf(minuteCount) + " Minute" + ((minuteCount == 1) ? ", " : "n, ");
         score %= 60000;
-        secondCount = (int)(score / 1000);
-        seconds = String.valueOf(secondCount) + " Sekunden.";
+        int secondCount = (int)(score / 1000);
+        String seconds = String.valueOf(secondCount) + " Sekunde"  + ((secondCount == 1) ? "" : "n");
 
         TextView timeWorkedOut = findViewById(R.id.timeWorkedOut);
         timeWorkedOut.setText(days + hours + minutes + seconds);
