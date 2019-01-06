@@ -5,32 +5,39 @@
     build-mode="COLD"
     density="xhdpi"
     format="10"
+    ir-eligibility="COMPATIBLE"
     plugin-version="3.2.1"
-    timestamp="1546717979604"
+    timestamp="1546734664927"
     token="-7886682727060644906"
     verifier="COLD_SWAP_REQUESTED" >
 
     <task
         name="javac"
-        duration="0" />
+        duration="131" />
     <task
         name="instant-run-dex"
         duration="0" />
     <task
         name="instant-run-transform"
-        duration="0" />
+        duration="19" />
     <task
         name="verifier"
-        duration="0" />
+        duration="3" />
 
+    <artifact
+        location="D:\Daten\AndroidStudio\MonsterFitGamification\app\build\intermediates\split-apk\debug\slices\slice_5.apk"
+        type="SPLIT" />
     <artifact
         location="D:\Daten\AndroidStudio\MonsterFitGamification\app\build\intermediates\instant-run-apk\debug\app-debug.apk"
         type="SPLIT_MAIN" />
 
     <build
         build-mode="FULL"
-        timestamp="1546716544201"
+        timestamp="1546734115402"
         verifier="FULL_BUILD_REQUESTED" >
+        <artifact
+            location="D:\Daten\AndroidStudio\MonsterFitGamification\app\build\intermediates\split-apk\debug\slices\slice_2.apk"
+            type="SPLIT" />
         <artifact
             location="D:\Daten\AndroidStudio\MonsterFitGamification\app\build\intermediates\split-apk\debug\slices\slice_5.apk"
             type="SPLIT" />
@@ -50,9 +57,6 @@
             location="D:\Daten\AndroidStudio\MonsterFitGamification\app\build\intermediates\split-apk\debug\slices\slice_1.apk"
             type="SPLIT" />
         <artifact
-            location="D:\Daten\AndroidStudio\MonsterFitGamification\app\build\intermediates\split-apk\debug\slices\slice_2.apk"
-            type="SPLIT" />
-        <artifact
             location="D:\Daten\AndroidStudio\MonsterFitGamification\app\build\intermediates\split-apk\debug\dep\dependencies.apk"
             type="SPLIT" />
         <artifact
@@ -70,20 +74,21 @@
     </build>
     <build
         build-mode="COLD"
-        ir-eligibility="FIELD_ADDED"
-        timestamp="1546717877134"
+        ir-eligibility="METHOD_ADDED"
+        timestamp="1546734640591"
         verifier="COLD_SWAP_REQUESTED" >
         <artifact
-            location="D:\Daten\AndroidStudio\MonsterFitGamification\app\build\intermediates\split-apk\debug\slices\slice_2.apk"
-            type="SPLIT" />
-        <artifact
-            location="D:\Daten\AndroidStudio\MonsterFitGamification\app\build\intermediates\split-apk\debug\slices\slice_5.apk"
-            type="SPLIT" />
+            location="D:\Daten\AndroidStudio\MonsterFitGamification\app\build\intermediates\instant-run-apk\debug\app-debug.apk"
+            type="SPLIT_MAIN" />
     </build>
     <build
         build-mode="COLD"
-        timestamp="1546717979604"
+        ir-eligibility="COMPATIBLE"
+        timestamp="1546734664927"
         verifier="COLD_SWAP_REQUESTED" >
+        <artifact
+            location="D:\Daten\AndroidStudio\MonsterFitGamification\app\build\intermediates\split-apk\debug\slices\slice_5.apk"
+            type="SPLIT" />
         <artifact
             location="D:\Daten\AndroidStudio\MonsterFitGamification\app\build\intermediates\instant-run-apk\debug\app-debug.apk"
             type="SPLIT_MAIN" />
