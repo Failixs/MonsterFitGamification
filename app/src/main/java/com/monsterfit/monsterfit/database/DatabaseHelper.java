@@ -59,10 +59,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     // Methods for exercises
     private void insertExercise(SQLiteDatabase db, String title, Exercise.TYPE type, String instruction, int difficulty){
         ContentValues values = new ContentValues();
-        values.put("title", title);
-        values.put("type", type.name());
-        values.put("instruction", instruction);
-        values.put("difficulty", difficulty);
+        values.put(Exercise.COLUMN_TITLE, title);
+        values.put(Exercise.COLUMN_TYPE, type.name());
+        values.put(Exercise.COLUMN_INSTRUCTION, instruction);
+        values.put(Exercise.COLUMN_DIFFICULTY, difficulty);
         db.insert(Exercise.TABLE_NAME, null, values);
     }
 
@@ -110,8 +110,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     // Methods for scores
     private void insertScore(SQLiteDatabase db, String description, long score){
         ContentValues values = new ContentValues();
-        values.put("description", description);
-        values.put("score", score);
+        values.put(Score.COLUMN_DESCRIPTION, description);
+        values.put(Score.COLUMN_SCORE, score);
         db.insert(Score.TABLE_NAME, null, values);
     }
 
@@ -133,6 +133,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.close();
 
         return score;
+    }
+
+    public void updateScore(Score score){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(Score.COLUMN_SCORE, score.getScore());
+
+        db.update(Score.TABLE_NAME, values, Score.COLUMN_ID + " = ?", new String[]{String.valueOf(score.getId())});
     }
 
 

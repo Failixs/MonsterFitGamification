@@ -14,6 +14,7 @@ public class ChooseTrainingActivity extends AppCompatActivity {
     }
 
     public void changeViewToTrainingActivity(View v){
+        finish();
         startActivity(new Intent(this, TrainingActivity.class).putExtra("tag", v.getTag().toString()));
     }
 }

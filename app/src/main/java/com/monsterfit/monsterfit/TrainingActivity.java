@@ -15,15 +15,15 @@ import android.widget.TextView;
 
 import com.monsterfit.monsterfit.database.DatabaseHelper;
 import com.monsterfit.monsterfit.database.Exercise;
+import com.monsterfit.monsterfit.database.Score;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class TrainingActivity extends AppCompatActivity {
 
-
-    //TODO: Get maxHealth from defeated enemies
-    private int maxHealth = 1000;
+    private Score killedMonsters;
+    private int maxHealth;
     private int currentHealth;
 
     private Exercise.TYPE tag;
@@ -37,16 +37,19 @@ public class TrainingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_training);
 
+        DatabaseHelper db = new DatabaseHelper(this);
+
         this.tag = getTag();
         setMonsterImageView();
-        List<Exercise> exerciseList = getExerciseListByType();
+
+        setMaxHealth(db);
+
+        List<Exercise> exerciseList = getExerciseListByType(db);
         selectedExercises = getSelectedExercises(exerciseList);
 
         //buttons,bars etc.
-
         monsterHealthBar = findViewById(R.id.monsterHealthBar);
         monsterHealthNumber = findViewById(R.id.monsterHealthNumber);
-
 
         final Button topLeftButton = findViewById(R.id.topLeftButton);
         final Button topRightButton = findViewById(R.id.topRightButton);
@@ -60,6 +63,8 @@ public class TrainingActivity extends AppCompatActivity {
 
         monsterHealthBar.setMax(maxHealth);
         currentHealth = maxHealth;
+        monsterHealthBar.setProgress(currentHealth);
+        monsterHealthNumber.setText(" " + String.valueOf(currentHealth) + "/" + String.valueOf(maxHealth) + "HP");
     }
 
     public void instructionClick(View v){
@@ -99,6 +104,16 @@ public class TrainingActivity extends AppCompatActivity {
 
         monsterHealthBar.setProgress(currentHealth);
         monsterHealthNumber.setText(" " + String.valueOf(currentHealth) + "/" + String.valueOf(maxHealth) + "HP");
+
+        if(currentHealth <= 0){
+
+            killedMonsters.setScore(killedMonsters.getScore() + 1);
+
+            DatabaseHelper db = new DatabaseHelper(this);
+            db.updateScore(killedMonsters);
+
+            finish();
+        }
     }
 
     /**
@@ -113,10 +128,10 @@ public class TrainingActivity extends AppCompatActivity {
         return Exercise.TYPE.valueOf(tag);
     }
 
-    //TODO: Change drawings
     /**
      * Sets the enemy monster image considering the tag
      */
+    //TODO: Change drawings
     private void setMonsterImageView(){
         ImageView monster = findViewById(R.id.monster);
         switch(tag){
@@ -135,13 +150,28 @@ public class TrainingActivity extends AppCompatActivity {
         }
     }
 
+    private void setMaxHealth(DatabaseHelper db){
+        switch(this.tag){
+            case ARMS:
+                killedMonsters = db.getScore(Score.KILLED_ARM_MONSTERS);
+                break;
+            case CHEST:
+                killedMonsters = db.getScore(Score.KILLED_CHEST_MONSTERS);
+                break;
+            case LEGS:
+                killedMonsters = db.getScore(Score.KILLED_LEG_MONSTERS);
+                break;
+        }
+
+        this.maxHealth = 500 + 20 * (int)killedMonsters.getScore();
+
+    }
     /**
      * Gets all exercises from database with the tag as exercise type
      * @return exerciseList
      */
-    private List<Exercise> getExerciseListByType(){
+    private List<Exercise> getExerciseListByType(DatabaseHelper db){
         List<Exercise> exerciseList = new ArrayList<>();
-        DatabaseHelper db = new DatabaseHelper(this);
         exerciseList = db.getExerciseByType(this.tag);
         return exerciseList;
     }

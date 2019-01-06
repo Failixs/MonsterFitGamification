@@ -27,7 +27,6 @@ import java.io.File;
 
 public class MainActivity extends AppCompatActivity {
 
-   // public String installedTime = String.valueOf(daysInstalled());
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +35,12 @@ public class MainActivity extends AppCompatActivity {
 
         setLayout();
 
+        setStatistics();
+    }
+
+    @Override
+    protected void onResume(){
+        super.onResume();
         setStatistics();
     }
 
