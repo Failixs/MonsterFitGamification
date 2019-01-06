@@ -22,6 +22,8 @@ import java.util.List;
 
 public class TrainingActivity extends AppCompatActivity {
 
+    private DatabaseHelper db;
+
     private Score killedMonsters;
     private int maxHealth;
     private int currentHealth;
@@ -32,12 +34,16 @@ public class TrainingActivity extends AppCompatActivity {
     private ProgressBar monsterHealthBar;
     private TextView monsterHealthNumber;
 
+    private long workOutStarted;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_training);
 
-        DatabaseHelper db = new DatabaseHelper(this);
+        workOutStarted = System.currentTimeMillis();
+
+        db = new DatabaseHelper(this);
 
         this.tag = getTag();
         setMonsterImageView();
@@ -65,6 +71,17 @@ public class TrainingActivity extends AppCompatActivity {
         currentHealth = maxHealth;
         monsterHealthBar.setProgress(currentHealth);
         monsterHealthNumber.setText(" " + String.valueOf(currentHealth) + "/" + String.valueOf(maxHealth) + "HP");
+    }
+
+    @Override
+    protected void onPause(){
+        super.onPause();
+
+        // Update worked out time ion dataBase
+        long workOutTime = System.currentTimeMillis() - workOutStarted;
+        Score workedOutTime = db.getScore(Score.TIME_WORKED_OUT);
+        workedOutTime.setScore(workedOutTime.getScore() + workOutTime);
+        db.updateScore(workedOutTime);
     }
 
     public void instructionClick(View v){
@@ -109,7 +126,6 @@ public class TrainingActivity extends AppCompatActivity {
 
             killedMonsters.setScore(killedMonsters.getScore() + 1);
 
-            DatabaseHelper db = new DatabaseHelper(this);
             db.updateScore(killedMonsters);
 
             finish();
