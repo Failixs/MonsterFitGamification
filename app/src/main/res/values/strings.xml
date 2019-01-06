@@ -14,7 +14,7 @@
     <string name="action_settings">Settings</string>
 
     <string name="timeInstalled">Installiert seit:</string>
-    <string name="timeWorkedOut">Workeout-Zeit:</string>
+    <string name="timeWorkedOut">Workout-Zeit:</string>
     <string name="killedArmMonster">Arm Monster besiegt:</string>
     <string name="killedChestMonster">Brust Monster besiegt:</string>
     <string name="killedLegMonster">Bein Monster besiegt:</string>
