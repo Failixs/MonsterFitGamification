@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -9,36 +9,32 @@
 
     <ImageButton
         android:id="@+id/chestMonsterButton"
-        android:layout_width="221dp"
-        android:layout_height="242dp"
-        android:layout_marginStart="144dp"
-        android:layout_marginLeft="144dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginBottom="252dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:onClick="changeViewToTrainingActivity"
         android:tag="CHEST"
         android:src="@drawable/machomei"
-        android:background="@color/background"
-        android:text="@string/startPageLeftButton"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:scaleType="fitCenter"
+        android:background="@color/background" />
+
+    <ImageButton
+        android:id="@+id/armMonsterButton"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:onClick="changeViewToTrainingActivity"
+        android:tag="ARMS"
+        android:src="@drawable/nockchan"
+        android:scaleType="fitCenter"
+        android:background="@color/background" />
 
     <ImageButton
         android:id="@+id/legMonsterButton"
-        android:layout_width="252dp"
-        android:layout_height="210dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginBottom="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:onClick="changeViewToTrainingActivity"
         android:tag="LEGS"
         android:src="@drawable/kicklee"
-        android:background="@color/background"
-        android:text="@string/startPageLeftButton"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:scaleType="fitCenter"
+        android:background="@color/background" />
 
-</android.support.constraint.ConstraintLayout>
+</RelativeLayout>

@@ -158,7 +158,7 @@ public class TrainingActivity extends AppCompatActivity {
                 monster.setImageResource(R.drawable.machomei);
                 break;
             case ARMS:
-                monster.setImageResource(R.drawable.machomei);
+                monster.setImageResource(R.drawable.nockchan);
                 break;
             default:
                 monster.setImageResource(R.drawable.machomei);

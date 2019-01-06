@@ -62,19 +62,16 @@ public class MainActivity extends AppCompatActivity {
         params = titleView.getLayoutParams();
         params.height = (int)Math.ceil(height * 0.2);
         titleView.setLayoutParams(new LinearLayout.LayoutParams(params));
-        titleView.invalidate();
 
         ImageView usersPicture = findViewById(R.id.usersPicture);
         params = usersPicture.getLayoutParams();
         params.height = (int)Math.ceil(height * 0.6);
         usersPicture.setLayoutParams(new LinearLayout.LayoutParams(params));
-        usersPicture.invalidate();
 
         LinearLayout startPageButtons = findViewById(R.id.startPageButtons);
         params = startPageButtons.getLayoutParams();
         params.height = (int)Math.ceil(height * 0.2);
         startPageButtons.setLayoutParams(new LinearLayout.LayoutParams(params));
-        startPageButtons.invalidate();
     }
 
     private void setStatistics(){
