@@ -179,7 +179,7 @@ public class TrainingActivity extends AppCompatActivity {
                 break;
         }
 
-        this.maxHealth = 500 + 20 * (int)killedMonsters.getScore();
+        this.maxHealth = (int)((0.98 + Math.random() * 0.04)*(500 + 10 * (int)killedMonsters.getScore()));
 
     }
     /**
