@@ -12,6 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.monsterfit.monsterfit.database.DatabaseHelper;
 import com.monsterfit.monsterfit.database.Exercise;
@@ -117,7 +118,12 @@ public class TrainingActivity extends AppCompatActivity {
 
     public void trainingDoneClick(View v){
         Exercise exerciseDone = selectedExercises[Integer.valueOf(v.getTag().toString())];
-        currentHealth = Math.max(0, currentHealth - exerciseDone.getDifficulty() * exerciseDone.getRepetitions());
+        double critical = Math.random() * 10; // every 10th hit should be a critical hit
+        if (critical > 9){
+            critical = 1.5;
+            Toast.makeText(getApplicationContext(), "Volltreffer!", Toast.LENGTH_SHORT).show();
+        } else critical = 1;
+        currentHealth = Math.max(0, (int)Math.ceil(currentHealth - critical * exerciseDone.getDifficulty() * exerciseDone.getRepetitions()));
 
         monsterHealthBar.setProgress(currentHealth);
         monsterHealthNumber.setText(" " + String.valueOf(currentHealth) + "/" + String.valueOf(maxHealth) + "HP");
