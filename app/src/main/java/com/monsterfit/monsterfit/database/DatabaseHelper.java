@@ -12,7 +12,7 @@ import java.util.List;
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     // Database Version
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
 
     // Database Name
     private static final String DATABASE_NAME = "exercises_db";
@@ -33,8 +33,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         // create notes table
         db.execSQL(Exercise.CREATE_TABLE);
         insertExercise(db, "Liegestütz", Exercise.TYPE.ARMS, "Die Hände befinden sich etwas über schulterbreit voneinander entfernt am Boden. Die Finger zeigen nach vorne, die Daumen nach innen. Durch gleichzeitiges Anspannen der Arme werden diese gestreckt und der Oberkörper hebt vom Boden ab. Das Gewicht wird gleichmäßig auf Zehenspitzen und Händen verteilt. Kopf, Hals, Wirbelsäule, Gesäß und Knie bilden eine Linie und die Bauchmuskulatur ist angespannt. Nun werden beide Arme gleichzeitig gebeugt und der Oberkörper somit abgesenkt, bis die Nasenspitze fast den Boden berührt. Der Körper bleibt dabei gestreckt.", 10);
-        insertExercise(db, "Liegestütz", Exercise.TYPE.LEGS, "Die Hände befinden sich etwas über schulterbreit voneinander entfernt am Boden. Die Finger zeigen nach vorne, die Daumen nach innen. Durch gleichzeitiges Anspannen der Arme werden diese gestreckt und der Oberkörper hebt vom Boden ab. Das Gewicht wird gleichmäßig auf Zehenspitzen und Händen verteilt. Kopf, Hals, Wirbelsäule, Gesäß und Knie bilden eine Linie und die Bauchmuskulatur ist angespannt. Nun werden beide Arme gleichzeitig gebeugt und der Oberkörper somit abgesenkt, bis die Nasenspitze fast den Boden berührt. Der Körper bleibt dabei gestreckt.", 1);
         insertExercise(db, "Liegestütz", Exercise.TYPE.CHEST, "Die Hände befinden sich etwas über schulterbreit voneinander entfernt am Boden. Die Finger zeigen nach vorne, die Daumen nach innen. Durch gleichzeitiges Anspannen der Arme werden diese gestreckt und der Oberkörper hebt vom Boden ab. Das Gewicht wird gleichmäßig auf Zehenspitzen und Händen verteilt. Kopf, Hals, Wirbelsäule, Gesäß und Knie bilden eine Linie und die Bauchmuskulatur ist angespannt. Nun werden beide Arme gleichzeitig gebeugt und der Oberkörper somit abgesenkt, bis die Nasenspitze fast den Boden berührt. Der Körper bleibt dabei gestreckt.", 10);
+        insertExercise(db, "Kniebeugen", Exercise.TYPE.LEGS, "Tief in die Hocke gehen, Knie nicht vor die Zehenspitzen schieben. Bis 90°-Beugung im Knie.", 15);
+        insertExercise(db, "Sit-ups", Exercise.TYPE.CHEST, "Mit geradem Rücken nach oben richtung Decke schieben. Kopf in Verlängerung der Wirbelsäule. Zwischen den Übungen nicht ablegen.", 20);
+        insertExercise(db, "Einarmige Liegestütz", Exercise.TYPE.ARMS, "Beine breit, ein Arm unter dem Körper. Kopf, Hals, Wirbelsäule, Gesäß und Knie bilden eine Linie und die Bauchmuskulatur ist angespannt.", 43);
+        insertExercise(db, "Breite Liegestütz", Exercise.TYPE.CHEST, "Die Hände befinden sich doppelte Schulterbreite voneinander entfernt am Boden. Die Finger zeigen nach vorne, die Daumen nach innen. Durch gleichzeitiges Anspannen der Arme werden diese gestreckt und der Oberkörper hebt vom Boden ab. Das Gewicht wird gleichmäßig auf Zehenspitzen und Händen verteilt. Kopf, Hals, Wirbelsäule, Gesäß und Knie bilden eine Linie und die Bauchmuskulatur ist angespannt. Nun werden beide Arme gleichzeitig gebeugt und der Oberkörper somit abgesenkt, bis die Nasenspitze fast den Boden berührt. Der Körper bleibt dabei gestreckt.", 33);
+        insertExercise(db, "Dips", Exercise.TYPE.ARMS, "Hände stützen sich rücklings auf ein erhöhtes Objekt. Der Hintern bewegt sich richtung Boden und wird wieder durch Anspannen der Armmuskulatur in die Ausgangslage gedrückt.", 25);
+        insertExercise(db, "Scheibenwischer", Exercise.TYPE.CHEST, "Rücken liegt auf dem Boden, kein Hohlkreuz, Beine 90° in die Luft. Arme dürfen unterstützen. Beine nun nach links und nach rechts fallen lassen, ohne sie abzulegen. 90° in der Hüfte werden beibehalten.", 23);
+        insertExercise(db, "Stepper", Exercise.TYPE.LEGS, "Ein Fuß auf einer kleinen Erhöhung, der andere unten. Zwei Fußwechsel bilden einen Durchgang.", 7);
     }
 
     private void createScoreTable(SQLiteDatabase db){
@@ -54,6 +60,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         // Create tables again
         createExerciseTable(db);
+
+        if (oldVersion < 2){
+            db.execSQL("DELETE FROM " + Exercise.TABLE_NAME
+                    + " WHERE (" + Exercise.COLUMN_TITLE + "='Liegestütz' AND "
+                    + Exercise.COLUMN_TYPE + "='LEGS');");
+            insertExercise(db, "Kniebeugen", Exercise.TYPE.LEGS, "Tief in die Hocke gehen, Knie nicht vor die Zehenspitzen schieben. Bis 90°-Beugung im Knie.", 15);
+            insertExercise(db, "Sit-ups", Exercise.TYPE.CHEST, "Mit geradem Rücken nach oben richtung Decke schieben. Kopf in Verlängerung der Wirbelsäule. Zwischen den Übungen nicht ablegen.", 20);
+            insertExercise(db, "Einarmige Liegestütz", Exercise.TYPE.ARMS, "Beine breit, ein Arm unter dem Körper. Kopf, Hals, Wirbelsäule, Gesäß und Knie bilden eine Linie und die Bauchmuskulatur ist angespannt.", 43);
+            insertExercise(db, "Breite Liegestütz", Exercise.TYPE.CHEST, "Die Hände befinden sich doppelte Schulterbreite voneinander entfernt am Boden. Die Finger zeigen nach vorne, die Daumen nach innen. Durch gleichzeitiges Anspannen der Arme werden diese gestreckt und der Oberkörper hebt vom Boden ab. Das Gewicht wird gleichmäßig auf Zehenspitzen und Händen verteilt. Kopf, Hals, Wirbelsäule, Gesäß und Knie bilden eine Linie und die Bauchmuskulatur ist angespannt. Nun werden beide Arme gleichzeitig gebeugt und der Oberkörper somit abgesenkt, bis die Nasenspitze fast den Boden berührt. Der Körper bleibt dabei gestreckt.", 33);
+            insertExercise(db, "Dips", Exercise.TYPE.ARMS, "Hände stützen sich rücklings auf ein erhöhtes Objekt. Der Hintern bewegt sich richtung Boden und wird wieder durch Anspannen der Armmuskulatur in die Ausgangslage gedrückt.", 25);
+            insertExercise(db, "Scheibenwischer", Exercise.TYPE.CHEST, "Rücken liegt auf dem Boden, kein Hohlkreuz, Beine 90° in die Luft. Arme dürfen unterstützen. Beine nun nach links und nach rechts fallen lassen, ohne sie abzulegen. 90° in der Hüfte werden beibehalten.", 23);
+            insertExercise(db, "Stepper", Exercise.TYPE.LEGS, "Ein Fuß auf einer kleinen Erhöhung, der andere unten. Zwei Fußwechsel bilden einen Durchgang.", 7);
+        }
     }
 
     // Methods for exercises
