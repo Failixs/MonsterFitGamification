@@ -25,7 +25,7 @@ public class TrainingActivity extends AppCompatActivity {
 
     private DatabaseHelper db;
 
-    private Score killedMonsters;
+    private Score defeatedMonsters;
     private int maxHealth;
     private int currentHealth;
 
@@ -118,21 +118,30 @@ public class TrainingActivity extends AppCompatActivity {
 
     public void trainingDoneClick(View v){
         Exercise exerciseDone = selectedExercises[Integer.valueOf(v.getTag().toString())];
+
+        // Critical hits
         double critical = Math.random() * 10; // every 10th hit should be a critical hit
         if (critical > 9){
             critical = 1.5;
-            Toast.makeText(getApplicationContext(), "Volltreffer!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), getString(R.string.criticalHit), Toast.LENGTH_SHORT).show();
         } else critical = 1;
+
+        // Do the hit
         currentHealth = Math.max(0, (int)Math.ceil(currentHealth - critical * exerciseDone.getDifficulty() * exerciseDone.getRepetitions()));
 
         monsterHealthBar.setProgress(currentHealth);
         monsterHealthNumber.setText(" " + String.valueOf(currentHealth) + "/" + String.valueOf(maxHealth) + "HP");
 
+        // Count done exercises
+        exerciseDone.incrementCount(exerciseDone.getRepetitions());
+        db.updateCount(exerciseDone);
+
+        // Killing the monster
         if(currentHealth <= 0){
 
-            killedMonsters.setScore(killedMonsters.getScore() + 1);
+            defeatedMonsters.setScore(defeatedMonsters.getScore() + 1);
 
-            db.updateScore(killedMonsters);
+            db.updateScore(defeatedMonsters);
 
             finish();
         }
@@ -160,7 +169,7 @@ public class TrainingActivity extends AppCompatActivity {
             case LEGS:
                 monster.setImageResource(R.drawable.kicklee);
                 break;
-            case CHEST:
+            case TORSO:
                 monster.setImageResource(R.drawable.machomei);
                 break;
             case ARMS:
@@ -175,17 +184,17 @@ public class TrainingActivity extends AppCompatActivity {
     private void setMaxHealth(DatabaseHelper db){
         switch(this.tag){
             case ARMS:
-                killedMonsters = db.getScore(Score.KILLED_ARM_MONSTERS);
+                defeatedMonsters = db.getScore(Score.DEFEATED_ARM_MONSTERS);
                 break;
-            case CHEST:
-                killedMonsters = db.getScore(Score.KILLED_CHEST_MONSTERS);
+            case TORSO:
+                defeatedMonsters = db.getScore(Score.DEFEATED_TORSO_MONSTERS);
                 break;
             case LEGS:
-                killedMonsters = db.getScore(Score.KILLED_LEG_MONSTERS);
+                defeatedMonsters = db.getScore(Score.DEFEATED_LEG_MONSTERS);
                 break;
         }
 
-        this.maxHealth = (int)((0.98 + Math.random() * 0.04)*(500 + 10 * (int)killedMonsters.getScore()));
+        this.maxHealth = (int)((0.98 + Math.random() * 0.04)*(500 + 10 * (int)defeatedMonsters.getScore()));
 
     }
     /**
@@ -221,7 +230,7 @@ public class TrainingActivity extends AppCompatActivity {
     private Exercise getExercise(List<Exercise> exerciseList, int iterationsToDo){
         if(exerciseList.size() > 0) {
             Exercise randomExercise = exerciseList.get((int) (Math.random() * exerciseList.size()));
-            Exercise exercise = new Exercise(randomExercise.getId(), randomExercise.getTitle(), randomExercise.getType(),randomExercise.getInstruction(),randomExercise.getDifficulty()); //randomExercise needs to be copied here!
+            Exercise exercise = new Exercise(randomExercise.getId(), randomExercise.getTitle(), randomExercise.getType(),randomExercise.getInstruction(),randomExercise.getDifficulty(), randomExercise.getCount()); //randomExercise needs to be copied here!
             if (4 * exercise.getDifficulty() >= maxHealth / iterationsToDo)
                 return getExercise(exerciseList, iterationsToDo); // Chosen exercise too difficult
             else {

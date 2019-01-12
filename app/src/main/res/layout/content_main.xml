@@ -69,12 +69,13 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/statisticsLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:layout_margin="16dp">
 
-                <TextView
+                <!--TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
 
@@ -154,11 +155,11 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
 
-                        android:text="@string/killedArmMonster"
+                        android:text="@string/defeatedLacertmons"
                         android:textSize="18sp"/>
 
                     <TextView
-                        android:id="@+id/killedArmMonster"
+                        android:id="@+id/defeatedLacertmons"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -182,11 +183,11 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
 
-                        android:text="@string/killedChestMonster"
+                        android:text="@string/defeatedTorsoMonster"
                         android:textSize="18sp"/>
 
                     <TextView
-                        android:id="@+id/killedChestMonster"
+                        android:id="@+id/defeatedTorsoMonster"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -210,18 +211,18 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
 
-                        android:text="@string/killedLegMonster"
+                        android:text="@string/defeatedLegMonster"
                         android:textSize="18sp"/>
 
                     <TextView
-                        android:id="@+id/killedLegMonster"
+                        android:id="@+id/defeatedLegMonster"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
 
                         android:textSize="18sp"/>
 
-                </LinearLayout>
+                </LinearLayout-->
 
             </LinearLayout>
 

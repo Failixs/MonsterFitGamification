@@ -5,12 +5,14 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Point;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
+import android.util.TypedValue;
 import android.view.Display;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,9 +23,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.monsterfit.monsterfit.database.DatabaseHelper;
+import com.monsterfit.monsterfit.database.Exercise;
 import com.monsterfit.monsterfit.database.Score;
 
 import java.io.File;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -78,50 +82,129 @@ public class MainActivity extends AppCompatActivity {
 
         DatabaseHelper db = new DatabaseHelper(this);
 
-        // Time installed
-        long score = db.getScore(Score.TIME_INSTALLED).getScore();
-        long difference = System.currentTimeMillis() - score;
-        int dayCount = (int)(difference / 86400000);
-        String days = (dayCount <= 0) ? "" : String.valueOf(dayCount) + " Tag" + ((dayCount == 1) ? ", " : "e, ");
-        difference %= 86400000;
-        int hourCount = (int)(difference / 3600000);
-        String hours = String.valueOf(hourCount) + " Stunde"  + ((hourCount == 1) ? "" : "n");
+        LinearLayout layout = findViewById(R.id.statisticsLayout);
+        layout.removeAllViews();
 
-        TextView timeInstalled = findViewById(R.id.timeInstalled);
-        timeInstalled.setText(days + hours);
+        TextView statisticsTextView = new TextView(this);
+        statisticsTextView.setLayoutParams( new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, 1.0f));
+        statisticsTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 24);
+        statisticsTextView.setTypeface(Typeface.SERIF, Typeface.BOLD_ITALIC);
+        statisticsTextView.setText(getString(R.string.statistics));
+        layout.addView(statisticsTextView);
 
-        // Worked out time
-        score = db.getScore(Score.TIME_WORKED_OUT).getScore();
+        List<Score> scores = db.getScores();
+        for(Score score : scores){
+            // The green Line
+            View view = new View(this);
+            view.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 1));
+            view.setBackgroundResource(R.color.colorButton);
+            layout.addView(view);
 
-        dayCount = (int)(score / 86400000);
-        days = (dayCount <= 0) ? "" : String.valueOf(dayCount) + " Tag" + ((dayCount == 1) ? ", " : "e, ");
-        score %= 86400000;
-        hourCount = (int)(score / 3600000);
-        hours = (hourCount <= 0) ? "" : String.valueOf(hourCount) + " Stunde" + ((hourCount == 1) ? ", " : "n, ");
-        score %= 3600000;
-        int minuteCount = (int)(score / 60000);
-        String minutes = (minuteCount <= 0) ? "" : String.valueOf(minuteCount) + " Minute" + ((minuteCount == 1) ? ", " : "n, ");
-        score %= 60000;
-        int secondCount = (int)(score / 1000);
-        String seconds = String.valueOf(secondCount) + " Sekunde"  + ((secondCount == 1) ? "" : "n");
+            LinearLayout scoreLayout = new LinearLayout(this);
+            scoreLayout.setLayoutParams( new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+            scoreLayout.setOrientation(LinearLayout.HORIZONTAL);
 
-        TextView timeWorkedOut = findViewById(R.id.timeWorkedOut);
-        timeWorkedOut.setText(days + hours + minutes + seconds);
+            LinearLayout descriptionLayout = new LinearLayout(this);
+            descriptionLayout.setLayoutParams( new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, 1.0f));
+            descriptionLayout.setOrientation(LinearLayout.HORIZONTAL);
 
-        // Killed arm monsters
-        score = db.getScore(Score.KILLED_ARM_MONSTERS).getScore();
-        TextView killedArmMonsters = findViewById(R.id.killedArmMonster);
-        killedArmMonsters.setText(String.valueOf(score));
+            // The little images in front of the monster descriptions
+            ImageView image = new ImageView(this);
+            image.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, 0.7f));
+            switch(score.getName()){
+                case Score.DEFEATED_ARM_MONSTERS:
+                    image.setBackgroundResource(R.drawable.nockchan);
+                    descriptionLayout.addView(image);
+                    break;
+                case Score.DEFEATED_TORSO_MONSTERS:
+                    image.setBackgroundResource(R.drawable.machomei);
+                    descriptionLayout.addView(image);
+                    break;
+                case Score.DEFEATED_LEG_MONSTERS:
+                    image.setBackgroundResource(R.drawable.kicklee);
+                    descriptionLayout.addView(image);
+                    break;
+                    default:
+                        break;
+            }
 
-        // Killed chest monsters
-        score = db.getScore(Score.KILLED_CHEST_MONSTERS).getScore();
-        TextView killedChestMonsters = findViewById(R.id.killedChestMonster);
-        killedChestMonsters.setText(String.valueOf(score));
+            // The description of each score
+            TextView descriptionTextView = new TextView(this);
+            descriptionTextView.setLayoutParams( new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, 0.3f));
+            descriptionTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+            descriptionTextView.setText(score.getDescription());
+            descriptionLayout.addView(descriptionTextView);
 
-        // Killed leg monsters
-        score = db.getScore(Score.KILLED_LEG_MONSTERS).getScore();
-        TextView killedLegMonsters = findViewById(R.id.killedLegMonster);
-        killedLegMonsters.setText(String.valueOf(score));
+            scoreLayout.addView(descriptionLayout);
+
+            // The score value
+            TextView scoreTextView = new TextView(this);
+            scoreTextView.setLayoutParams( new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, 1.0f));
+            scoreTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+            String scoreStr = "";
+            switch(score.getName()){
+                case Score.TIME_INSTALLED:
+                    long difference = System.currentTimeMillis() - score.getScore();
+                    int dayCount = (int)(difference / 86400000);
+                    scoreStr += (dayCount <= 0) ? "" : String.valueOf(dayCount) + " Tag" + ((dayCount == 1) ? ", " : "en, ");
+                    difference %= 86400000;
+                    int hourCount = (int)(difference / 3600000);
+                    scoreStr += String.valueOf(hourCount) + " Stunde"  + ((hourCount == 1) ? "" : "n");
+                    break;
+                case Score.TIME_WORKED_OUT:
+                    long temp = score.getScore();
+                    dayCount = (int)(temp / 86400000);
+                    scoreStr += (dayCount <= 0) ? "" : String.valueOf(dayCount) + " Tag" + ((dayCount == 1) ? ", " : "e, ");
+                    temp %= 86400000;
+                    hourCount = (int)(temp / 3600000);
+                    scoreStr += (hourCount <= 0) ? "" : String.valueOf(hourCount) + " Stunde" + ((hourCount == 1) ? ", " : "n, ");
+                    temp %= 3600000;
+                    int minuteCount = (int)(temp / 60000);
+                    scoreStr += (minuteCount <= 0) ? "" : String.valueOf(minuteCount) + " Minute" + ((minuteCount == 1) ? ", " : "n, ");
+                    temp %= 60000;
+                    int secondCount = (int)(temp / 1000);
+                    scoreStr += String.valueOf(secondCount) + " Sekunde"  + ((secondCount == 1) ? "" : "n");
+                    break;
+                default: //e.g. monsters defeated
+                    scoreStr = String.valueOf(score.getScore());
+            }
+            scoreTextView.setText(scoreStr);
+            scoreLayout.addView(scoreTextView);
+
+            layout.addView(scoreLayout);
+        }
+
+        List<Exercise> exercises = db.getExerciseByType(Exercise.TYPE.NONE);
+
+        for(Exercise exercise : exercises){
+            // The green Line
+            View view = new View(this);
+            view.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 1));
+            view.setBackgroundResource(R.color.colorButton);
+            layout.addView(view);
+
+            LinearLayout scoreLayout = new LinearLayout(this);
+            scoreLayout.setLayoutParams( new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+            scoreLayout.setOrientation(LinearLayout.HORIZONTAL);
+
+            // The description of each score
+            TextView descriptionTextView = new TextView(this);
+            descriptionTextView.setLayoutParams( new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, 1.0f));
+            descriptionTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+            descriptionTextView.setText(exercise.getTitle());
+            scoreLayout.addView(descriptionTextView);
+
+            // The score value
+            TextView scoreTextView = new TextView(this);
+            scoreTextView.setLayoutParams( new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, 1.0f));
+            scoreTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+            scoreTextView.setText(String.valueOf(exercise.getCount()));
+            scoreLayout.addView(scoreTextView);
+
+            layout.addView(scoreLayout);
+        }
+
+
     }
 
     public void changeViewToMonsterSelection(View v){

@@ -1,22 +1,24 @@
 package com.monsterfit.monsterfit.database;
 
 public class Score {
-    public enum TYPE { ARMS, CHEST, LEGS }
+    public enum TYPE { ARMS, TORSO, LEGS }
 
     public static final String TABLE_NAME = "scores";
 
     public static final String COLUMN_ID = "id";
+    public static final String COLUMN_NAME = "name";
     public static final String COLUMN_DESCRIPTION = "description";
     public static final String COLUMN_SCORE = "score";
 
     public static final String TIME_INSTALLED = "Installation date";
     public static final String TIME_WORKED_OUT = "Worked out time";
-    public static final String KILLED_ARM_MONSTERS = "Defeated arm monsters";
-    public static final String KILLED_CHEST_MONSTERS = "Defeated chest monsters";
-    public static final String KILLED_LEG_MONSTERS = "Defeated leg monsters";
+    public static final String DEFEATED_ARM_MONSTERS = "Defeated arm monsters";
+    public static final String DEFEATED_TORSO_MONSTERS = "Defeated torso monsters";
+    public static final String DEFEATED_LEG_MONSTERS = "Defeated leg monsters";
 
 
     private int id;
+    private String name;
     private String description;
     private long score;
 
@@ -24,6 +26,7 @@ public class Score {
     public static final String CREATE_TABLE =
             "CREATE TABLE " + TABLE_NAME + "("
                     + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+                    + COLUMN_NAME + " TEXT,"
                     + COLUMN_DESCRIPTION + " TEXT,"
                     + COLUMN_SCORE + " BIGINT"
                     + ")";
@@ -31,8 +34,9 @@ public class Score {
     public Score() {
     }
 
-    public Score(int id, String description, long score) {
+    public Score(int id, String name, String description, long score) {
         this.id = id;
+        this.name = name;
         this.description = description;
         this.score = score;
     }
@@ -40,6 +44,8 @@ public class Score {
     public int getId() {
         return id;
     }
+
+    public String getName() { return name; }
 
     public String getDescription() {
         return description;

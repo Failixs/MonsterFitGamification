@@ -1,30 +1,66 @@
 <resources>
     <string name="app_name">MonsterFit</string>
-    <string name="title_activity_main">MainActivity</string>
-    
+    <string name="action_settings">Settings</string>
+
+    <!-- Start page -->
     <string name="title">Monster Fit</string>
     <string name="startPageLeftButton">Arcade</string>
     <string name="startPageRightButton">VS</string>
-    
-    <string name="machomei">Machomei</string>
-    <string name="fettsack">Fettsack</string>
-    <string name="statistics">Statistiken</string>
-    <string name="fitsack">Fitsack</string>
 
-    <string name="action_settings">Settings</string>
+    <!-- Statistics/Scores -->
+    <string name="statistics">Statistiken</string>
 
     <string name="timeInstalled">Installiert seit:</string>
     <string name="timeWorkedOut">Workout-Zeit:</string>
-    <string name="killedArmMonster">Arm Monster besiegt:</string>
-    <string name="killedChestMonster">Brust Monster besiegt:</string>
-    <string name="killedLegMonster">Bein Monster besiegt:</string>
+    <string name="defeatedLacertmons">Lacertmons besiegt:</string>
+    <string name="defeatedTruncmons">Truncmons besiegt:</string>
+    <string name="defeatedCrusmons">Crusmons besiegt:</string>
+    <!-- ... -->
+    <!-- ... -->
+
+    <!-- Exercises (alphabetically sorted)-->
+    <string name="dips">Dips</string>
+    <string name="dipsInstruction">Hände stützen sich rücklings auf ein erhöhtes Objekt. Der Hintern bewegt sich richtung Boden und wird wieder durch Anspannen der Armmuskulatur in die Ausgangslage gedrückt.</string>
+
+    <string name="oneArmedPushUp">Einarmige Liegestütz</string>
+    <string name="oneArmedPushUpInstruction">Beine breit, ein Arm unter dem Körper. Kopf, Hals, Wirbelsäule, Gesäß und Knie bilden eine Linie und die Bauchmuskulatur ist angespannt.</string>
+
+    <string name="pushUp">Liegestütz</string>
+    <string name="pushUpInstruction">Die Hände befinden sich etwas über schulterbreit voneinander entfernt am Boden. Die Finger zeigen nach vorne, die Daumen nach innen. Durch gleichzeitiges Anspannen der Arme werden diese gestreckt und der Oberkörper hebt vom Boden ab. Das Gewicht wird gleichmäßig auf Zehenspitzen und Händen verteilt. Kopf, Hals, Wirbelsäule, Gesäß und Knie bilden eine Linie und die Bauchmuskulatur ist angespannt. Nun werden beide Arme gleichzeitig gebeugt und der Oberkörper somit abgesenkt, bis die Nasenspitze fast den Boden berührt. Der Körper bleibt dabei gestreckt.</string>
+
+    <string name="sitUp">Sit-up</string>
+    <string name="sitUpInstruction">Mit geradem Rücken nach oben richtung Decke schieben. Kopf in Verlängerung der Wirbelsäule. Zwischen den Übungen nicht ablegen.</string>
+
+    <string name="squat">Kniebeuge</string>
+    <string name="squatInstruction">Tief in die Hocke gehen, Knie nicht vor die Zehenspitzen schieben. Bis 90°-Beugung im Knie.</string>
+
+    <string name="steps">Steps</string>
+    <string name="stepsInstruction">Ein Fuß auf einer kleinen Erhöhung, der andere unten. Zwei Fußwechsel bilden einen Durchgang.</string>
+
+    <string name="wideGripPushUp">Breite Liegestütz</string>
+    <string name="wideGripPushUpInstruction">Die Hände befinden sich doppelte Schulterbreite voneinander entfernt am Boden. Die Finger zeigen nach vorne, die Daumen nach innen. Durch gleichzeitiges Anspannen der Arme werden diese gestreckt und der Oberkörper hebt vom Boden ab. Das Gewicht wird gleichmäßig auf Zehenspitzen und Händen verteilt. Kopf, Hals, Wirbelsäule, Gesäß und Knie bilden eine Linie und die Bauchmuskulatur ist angespannt. Nun werden beide Arme gleichzeitig gebeugt und der Oberkörper somit abgesenkt, bis die Nasenspitze fast den Boden berührt. Der Körper bleibt dabei gestreckt.</string>
+    <!-- ... -->
+
+    <!-- Fight scene -->
+    <string name="criticalHit">Volltreffer!</string>
+    <!-- ... -->
+
+    <!-- only used for content descriptions-->
+    <string name="character">Character</string>
+    <string name="opponent">Gegner</string>
+    <string name="armOpp">Arm Monster (Lacertmon)</string>
+    <string name="torsoOpp">Torso Monster (Truncmon)</string>
+    <string name="legOpp">Bein Monster (Crusmon)</string>
+    <!-- ... -->
+
+
 
 
 
 
 
     
-    <string name="pushUps">Push Ups</string>
+    <!--<string name="pushUps">Push Ups</string>
     <string name="wideGripPushUps">Wide Grip Push Ups</string>
     <string name="oneArmPushUps">One Arm Push Ups</string>
     <string name="handsPressing">Hands pressing</string>
@@ -34,15 +70,15 @@
 
 
     <string name="pushUpsInstruction">Get into plank position, with your hands under but slightly outside of your shoulders.
-        Lower your body until your chest nearly touches the floor. Pause, then push back to the starting position as quickly as possible.</string>
+        Lower your body until your torso nearly touches the floor. Pause, then push back to the starting position as quickly as possible.</string>
     <string name="wideGripPushUpsInstruction">Get into plank position, with your hands as wide apart as you can.
-        Lower your body until your chest nearly touches the floor. Pause, then push back to the starting position as quickly as possible.</string>
+        Lower your body until your torso nearly touches the floor. Pause, then push back to the starting position as quickly as possible.</string>
     <string name="oneArmPushUpsInstruction">Push Ups with one Arm you little piece of shit!</string>
     <string name="handsPressingInstruction">Press your hands against each other at the height of your nipples :D</string>
     <string name="inclinePushUpsInstruction">The steeper the incline, the less body weight you will need to work push.</string>
-    <string name="declinePushUpsInstruction">What goes up, must come down. These push-ups will help you target your upper chest and deltoid muscles specifically.
+    <string name="declinePushUpsInstruction">What goes up, must come down. These push-ups will help you target your upper torso and deltoid muscles specifically.
         It will also add more of your body weight to the exercise than a standard push-up, thus making it harder.</string>
-    <string name="tensionPushUpsInstruction">Lowering yourself very slowly (5sec) down into a push-up and pushing back equally as slow into your start position.</string>
+    <string name="tensionPushUpsInstruction">Lowering yourself very slowly (5sec) down into a push-up and pushing back equally as slow into your start position.</string>-->
 
 
 

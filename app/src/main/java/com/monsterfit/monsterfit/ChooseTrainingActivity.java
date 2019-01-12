@@ -33,12 +33,12 @@ public class ChooseTrainingActivity extends AppCompatActivity {
         //Setting the imagebuttons relative to the screen
         ViewGroup.MarginLayoutParams params;
 
-        ImageButton chestMonsterButton = findViewById(R.id.chestMonsterButton);
-        params = (ViewGroup.MarginLayoutParams) chestMonsterButton.getLayoutParams();
+        ImageButton torsoMonsterButton = findViewById(R.id.torsoMonsterButton);
+        params = (ViewGroup.MarginLayoutParams) torsoMonsterButton.getLayoutParams();
         params.width = width;
         params.height = height;
         params.setMargins(0, 0, width, height);
-        chestMonsterButton.setLayoutParams(new RelativeLayout.LayoutParams(params));
+        torsoMonsterButton.setLayoutParams(new RelativeLayout.LayoutParams(params));
 
         ImageButton armMonsterButton = findViewById(R.id.armMonsterButton);
         params = (ViewGroup.MarginLayoutParams) armMonsterButton.getLayoutParams();

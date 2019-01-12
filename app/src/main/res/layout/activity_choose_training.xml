@@ -8,14 +8,15 @@
     tools:context=".ChooseTrainingActivity">
 
     <ImageButton
-        android:id="@+id/chestMonsterButton"
+        android:id="@+id/torsoMonsterButton"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:onClick="changeViewToTrainingActivity"
-        android:tag="CHEST"
+        android:tag="TORSO"
         android:src="@drawable/machomei"
         android:scaleType="fitCenter"
-        android:background="@color/background" />
+        android:background="@color/background"
+        android:contentDescription="@string/torsoOpp" />
 
     <ImageButton
         android:id="@+id/armMonsterButton"
@@ -25,7 +26,8 @@
         android:tag="ARMS"
         android:src="@drawable/nockchan"
         android:scaleType="fitCenter"
-        android:background="@color/background" />
+        android:background="@color/background"
+        android:contentDescription="@string/armOpp" />
 
     <ImageButton
         android:id="@+id/legMonsterButton"
@@ -35,6 +37,7 @@
         android:tag="LEGS"
         android:src="@drawable/kicklee"
         android:scaleType="fitCenter"
-        android:background="@color/background" />
+        android:background="@color/background"
+        android:contentDescription="@string/legOpp" />
 
 </RelativeLayout>

@@ -8,38 +8,6 @@
     tools:context=".TrainingActivity">
 
     <Button
-        android:id="@+id/bottomLeftButton"
-        android:onClick="trainingDoneClick"
-        android:tag="2"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginRight="32dp"
-        android:layout_marginBottom="32dp"
-        android:background="@color/colorButton"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/bottomRightButton"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/bottomRightButton"
-        android:onClick="trainingDoneClick"
-        android:tag="3"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginBottom="32dp"
-        android:background="@color/colorButton"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/bottomLeftButton" />
-
-    <Button
         android:id="@+id/topLeftButton"
         android:onClick="trainingDoneClick"
         android:tag="0"
@@ -71,6 +39,38 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/topLeftButton" />
 
+    <Button
+        android:id="@+id/bottomLeftButton"
+        android:onClick="trainingDoneClick"
+        android:tag="2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
+        android:layout_marginBottom="32dp"
+        android:background="@color/colorButton"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/bottomRightButton"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/bottomRightButton"
+        android:onClick="trainingDoneClick"
+        android:tag="3"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="32dp"
+        android:background="@color/colorButton"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/bottomLeftButton" />
+
     <ImageView
         android:id="@+id/character"
         android:layout_width="245dp"
@@ -78,7 +78,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginBottom="16dp"
-        android:contentDescription="@string/fitsack"
+        android:contentDescription="@string/character"
         app:layout_constraintBottom_toTopOf="@+id/bottomLeftButton"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/fit" />
@@ -90,10 +90,11 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
-        android:contentDescription="@string/machomei"
+        android:contentDescription="@string/opponent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/machomei" />
+    <!-- srcCompat will be set dynamically by program -->
 
     <ProgressBar
         android:id="@+id/monsterHealthBar"
@@ -105,11 +106,12 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
-        android:max="@integer/monsterMaxHealth"
-        android:progress="@integer/monsterMaxHealth"
+        android:max="1000"
+        android:progress="1000"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/monster" />
+    <!-- max and progress will be set dynamically by program -->
 
     <TextView
         android:id="@+id/monsterHealthNumber"
@@ -120,6 +122,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/monsterHealthBar"
         app:layout_constraintEnd_toEndOf="@+id/monsterHealthBar"
         app:layout_constraintStart_toStartOf="@+id/monsterHealthBar" />
+    <!-- text will be set dynamically by program -->
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/floatingActionButtonTopLeft"

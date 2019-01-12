@@ -2,7 +2,7 @@ package com.monsterfit.monsterfit.database;
 
 public class Exercise {
 
-    public enum TYPE { ARMS, CHEST, LEGS }
+    public enum TYPE { NONE, ARMS, TORSO, LEGS }
 
     public static final String TABLE_NAME = "exercises";
 
@@ -11,12 +11,14 @@ public class Exercise {
     public static final String COLUMN_TYPE = "type";
     public static final String COLUMN_INSTRUCTION = "instruction";
     public static final String COLUMN_DIFFICULTY = "difficulty";
+    public static final String COLUMN_COUNT = "count";
 
     private int id;
     private String title;
     private TYPE type;
     private String instruction;
     private int difficulty;
+    private int count;
     private int repetitions;
 
     // Create table SQL query
@@ -26,18 +28,20 @@ public class Exercise {
                     + COLUMN_TYPE + " TEXT,"
                     + COLUMN_TITLE + " TEXT,"
                     + COLUMN_INSTRUCTION + " TEXT,"
-                    + COLUMN_DIFFICULTY + " INTEGER"
+                    + COLUMN_DIFFICULTY + " INTEGER,"
+                    + COLUMN_COUNT + " INTEGER DEFAULT NULL"
                     + ")";
 
     public Exercise() {
     }
 
-    public Exercise(int id, String title, TYPE type, String instruction, int difficulty) {
+    public Exercise(int id, String title, TYPE type, String instruction, int difficulty, int count) {
         this.id = id;
         this.title = title;
         this.type = type;
         this.instruction = instruction;
         this.difficulty = difficulty;
+        this.count = count;
     }
 
     public int getId() {
@@ -59,6 +63,10 @@ public class Exercise {
     public int getDifficulty(){
         return difficulty;
     }
+
+    public int getCount(){return count;}
+
+    public void incrementCount(int count){this.count += count;}
 
     public int getRepetitions() { return repetitions; }
 
