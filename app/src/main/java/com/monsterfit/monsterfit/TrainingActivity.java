@@ -217,7 +217,7 @@ public class TrainingActivity extends AppCompatActivity {
             Exercise randomExercise = exerciseList.get((int) (Math.random() * exerciseList.size()));
             Exercise exercise = new Exercise(randomExercise.getId(), randomExercise.getTitle(), randomExercise.getType(),randomExercise.getInstruction(),randomExercise.getDifficulty()); //randomExercise needs to be copied here!
             if (4 * exercise.getDifficulty() >= maxHealth / iterationsToDo)
-                getExercise(exerciseList, iterationsToDo); // Chosen exercise too difficult
+                return getExercise(exerciseList, iterationsToDo); // Chosen exercise too difficult
             else {
                 int rep = 5;
                 while (rep * exercise.getDifficulty() < maxHealth / iterationsToDo) {
