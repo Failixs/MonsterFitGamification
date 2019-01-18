@@ -19,26 +19,98 @@
     <!-- ... -->
 
     <!-- Exercises (alphabetically sorted)-->
+    <string name="becklift">Beckenheben</string>
+    <string name="beckliftInstruction">Rücklings auf den Boden legen mit aufgestellten Beinen. Hebe das Becken und atme aus, bis der Körper von den Knien bis zu den Schultern eine Linie bilden. Lasse das Becken herabsinken, ohne das Becken auf dem Boden abzulegen.</string>
+
+    <string name="beckliftLeg">Beckenheben</string>
+    <string name="beckliftLegInstruction">Rücklings auf den Boden legen mit aufgestellten Beinen. Hebe das Becken und atme aus, bis der Körper von den Knien bis zu den Schultern eine Linie bilden. Strecke nun ein Bein gerade nach vorne aus und halte die Position kurz. Lasse das Becken herabsinken, ohne das Becken auf dem Boden abzulegen. Wiederhole das mit dem anderen Bein.</string>
+
+    <string name="bicepsCurl">Bizeps Curl</string>
+    <string name="bicepsCurlInstruction">Man setzt sich auf einen Stuhl oder aufrecht auf den Boden. Die Beine sind aufgestellt. Nun greift man mit einer Hand unter den Oberschenkel des gegenüberliegenden Beins und zieht es so weit wie möglich durch Anspannung des Oberarmes an der Körper heran. Wenn man fertig ist wiederholt man es mit dem anderen Arm.</string>
+
+    <string name="bicycleCrunches">Fahrradcrunches</string>
+    <string name="bicycleCrunchesInstruction">Lege dich rücklings auf den Boden mit den Händen hinter dem Kopf. Hebe nun gegengleich ein Bein und ein Arm an, sodass sie sich in der Körpermitte berühren.</string>
+
+    <string name="bridge">Schulterbrücke</string>
+    <string name="bridgeInstruction">Legen Sie sich auf den Rücken. Die Beine sind dabei angewinkelt und die Arme liegen auf dem Boden neben dem Körper. Der Kopf schaut nach oben. Heben Sie nun das Becken soweit an, bis Sie eine gerade Linie mit ihrem Oberkörper formen. Halten Sie diese Position an der höchsten Stelle 1-3 Sekunden und senken Sie das Becken danach wieder ab.</string>
+
+    <string name="calfRaise">Wadenheben</string>
+    <string name="calfRaiseInstruction">Etwa Schulterbreit hinstellen. Aus dieser Position heraus auf die Fußballen gehen und die Ferse so weit nach oben schieben wie es geht. Danach langsam wieder in die Ausgangslage absenken.</string>
+
+    <string name="circlePushUps">Kreisliegestütz</string>
+    <string name="circlePushUpsInstruction">Die Hände befinden sich doppelte Schulterbreite voneinander entfernt am Boden. Die Finger zeigen nach vorne, die Daumen nach innen. Nun senkt man den Oberkörper so nah wie möglich zu einer Hand hinunter. Dann gleitet der Oberkörper knapp über dem Boden zur anderen Hand und von dort aus wieder hochdrücken in die Ausgangsstellung. Danach fängt man mit der anderen Hand an.</string>
+
+    <string name="clapPushUp">Klatschliegestütz</string>
+    <string name="clapPushUpInstruction">Die Hände befinden sich etwas mehr als schulterbreit voneinander entfernt am Boden. Die Finger zeigen nach vorne, die Daumen nach innen. Nun werden die Arme so schnell gestreckt, dass man kurzzeitig mit dem Oberkörper vom Boden wegkommt und dabei in die Hände klatscht.</string>
+
     <string name="dips">Dips</string>
     <string name="dipsInstruction">Hände stützen sich rücklings auf ein erhöhtes Objekt. Der Hintern bewegt sich richtung Boden und wird wieder durch Anspannen der Armmuskulatur in die Ausgangslage gedrückt.</string>
+
+    <string name="fireHydrant">Feuerhydrant</string>
+    <string name="fireHydrantInstruction">Begeben Sie sich in den Vierfüßlerstand. Achten Sie darauf, dass Ihre Knie und Hände hüft- bzw. schulterbreit auseinander sind. Ihre Knie sollten direkt unter Ihrer Hüfte auf den Boden aufsetzen.Spannen Sie Ihre Rumpfmuskeln an und heben Sie, ohne die Hüfte zu bewegen, den linken Oberschenkel an der linken Seite Ihres Körpers nach außen hin hoch. Das Knie bleibt im 90° Winkel. Führen Sie nun ein Trittbewegung zur gleichen Seite durch, ohne dabei die Hüfte zu senken oder das linke Knie zu bewegen.</string>
+
+    <string name="highPushUp">Hohe Liegestütz</string>
+    <string name="highPushUpInstruction">Die Hände befinden sich etwas mehr als schulterbreit voneinander entfernt am Boden. Die Finger zeigen nach vorne, die Daumen nach innen. Die Füße befinden sich erhöht abgestellt (auf der Bettkante oder ähnlichem). Nun wie bei normalen Liegestütze den Oberkörper heben und senken.</string>
+
+    <string name="jackknife">Klappmesser</string>
+    <string name="jackknifeInstruction">Auf den Rücken legen. Deine Arme befinden sich entlang des Kopfes nach hinten ausgestreckt. Jetzt führst Du Deine Beine langsam und kontrolliert nach oben und kommst gleichzeitig mit dem Oberkörper so hoch, dass sich Deine Hände in etwa auf Knöchelhöhe befinden. Anschließend in die Ausgangspostion zurückkehren. Arme und Beine bleiben während der gesamten Übung gestreckt.</string>
+
+    <string name="lunges">Ausfallschritt</string>
+    <string name="lungesInstruction">Beginnen Sie in einem etwa hüftbreiten Stand. Nehmen Sie die Hände an den Hinterkopf und setzen Sie mit einem weiten Schritt ein Bein nach vorne. Senken Sie Ihren Körper so tief wie Sie können. Der untere Rücken bleibt dabei gerade, der Oberkörper so aufrecht wie möglich. Ihr hinteres Knie berührt fast den Boden. Drücken Sie sich aus dieser Position mit der Kraft der Oberschenkel-und Gesäßmuskulatur wieder in die Vertikale.</string>
+
+    <string name="lungesJumping">Sprungausfallschritt</string>
+    <string name="lungesJumpingInstruction">Beginnen Sie in einer Schrittposition, die Hände sind an der Hüfte, der Oberkörper ist aufrecht und die Knie sind ungefähr im 90°-Winkel gebeugt. Drücken Sie sich blitzschnell und kraftvoll zu einem Sprung vom Boden ab und wechseln Sie in der Luft die Position der Beine. Landen Sie im Ausfallschritt, das andere Bein ist nun vorne. Wiederholen Sie die Bewegung mit dem anderen Bein.</string>
+
+    <string name="lungesToTheSide">Seitlicher Ausfallschritt</string>
+    <string name="lungesToTheSideInstruction">Aufrecht stehen. Aus dieser Position heraus machen Sie einen großen Schritt zu Seite. Beugen Sie die Hüfte während des Schrittes nach vorne und bleiben sie mit dem Oberkörper so gut es geht aufrecht. Drücken Sie sich von dieser Position wieder in die Ausgangslage zurück und machen Sie das gleiche mit dem anderen Bein.</string>
+
+    <string name="mountainClimbers">Mountain Climbers</string>
+    <string name="mountainClimbersInstruction">Geh in die Liegestützposition. Bewege deine Beine in relativ hohem Tempo abwechselnd zu deinen Knien nach vorne, so dass dein Knie deinen Ellbogen außen am Arm fast berührt. </string>
 
     <string name="oneArmedPushUp">Einarmige Liegestütz</string>
     <string name="oneArmedPushUpInstruction">Beine breit, ein Arm unter dem Körper. Kopf, Hals, Wirbelsäule, Gesäß und Knie bilden eine Linie und die Bauchmuskulatur ist angespannt.</string>
 
-    <string name="pushUp">Liegestütz</string>
-    <string name="pushUpInstruction">Die Hände befinden sich etwas über schulterbreit voneinander entfernt am Boden. Die Finger zeigen nach vorne, die Daumen nach innen. Durch gleichzeitiges Anspannen der Arme werden diese gestreckt und der Oberkörper hebt vom Boden ab. Das Gewicht wird gleichmäßig auf Zehenspitzen und Händen verteilt. Kopf, Hals, Wirbelsäule, Gesäß und Knie bilden eine Linie und die Bauchmuskulatur ist angespannt. Nun werden beide Arme gleichzeitig gebeugt und der Oberkörper somit abgesenkt, bis die Nasenspitze fast den Boden berührt. Der Körper bleibt dabei gestreckt.</string>
+    <string name="plank">Plank</string>
+    <string name="plankInstruction">Du liegst auf dem Bauch. Beuge deine Arme und lege die Unterarme parallel zueinander auf den Boden ab. Die Ellenbogen befinden sich dabei genau unter den Schultern. Hebe nun die Hüfte und die Beine vom Boden ab. Halte die Spannung, dass dein Körper so gerade wie ein Brett ist.</string>
+
+    <string name="plankSuperman">Superman Plank</string>
+    <string name="plankSupermanInstruction">Du liegst auf dem Bauch. Beuge deine Arme und lege die Unterarme parallel zueinander auf den Boden ab. Die Ellenbogen befinden sich dabei genau unter den Schultern. Hebe nun die Hüfte und die Beine vom Boden ab. Halte die Spannung, dass dein Körper so gerade wie ein Brett ist. Nun hebe abwechselnd gegengleich ein Arm und Bein an und halte es für 3 Sekunden.</string>
+
+    <string name="pushUp">Enge Liegestütz</string>
+    <string name="pushUpInstruction">Die Hände befinden sich schulterbreit voneinander entfernt am Boden. Die Finger zeigen nach vorne, die Daumen nach innen. Durch gleichzeitiges Anspannen der Arme werden diese gestreckt und der Oberkörper hebt vom Boden ab. Das Gewicht wird gleichmäßig auf Zehenspitzen und Händen verteilt. Kopf, Hals, Wirbelsäule, Gesäß und Knie bilden eine Linie und die Bauchmuskulatur ist angespannt. Nun werden beide Arme gleichzeitig gebeugt und der Oberkörper somit abgesenkt, bis die Nasenspitze fast den Boden berührt. Der Körper bleibt dabei gestreckt.</string>
+
+    <string name="reverseCrunch">Reverse Sit-Up</string>
+    <string name="reverseCrunchInstruction">Lege dich Rücklings auf den Boden. Rolle den Bauch, ähnlich dem gewohnten Crunch, mit dem Unterschied, dass die Beine in gebeugter Stellung gehoben werden und der Oberkörper fixiert bleibt. Lasse gebeugten Beine wieder herabsinken.</string>
+
+    <string name="scissor">Schere</string>
+    <string name="scissorInstruction">Setzen Sie sich auf den Boden mit nach vorne gestreckten Beine. Benutzen Sie ihre Arme als Stütze heben oder hinter dem Körper. Der Oberkörper ist leicht nach hinten geneigt. Heben Sie nun ihre gestreckten Beine an und schieben Sie abwechselnd ein Bein über das andere Bein und umgekehrt. Beide Beine sollten während der Übungsausführung in der Luft sein.</string>
+
+    <string name="sideSupport">Seitstütz</string>
+    <string name="sideSupportInstruction">Der Körper befindet sich in Seitenlage. Auf einem Unterarm abstützen – der Arm zeigt dabei nach vorn. Die Beine parallel übereinander legen. Der Kopf und der Hals befinden sich in gerader Verlängerung der Wirbelsäule. Jetzt den Körper anheben (Oberschenkel und Oberkörper bilden eine Linie, der Ellenbogen befindet sich auf dem Boden unter der Schulter). Dabei die Fußaußenkante und den Unterarm in den Boden drücken und mit dem anderen Arm in der Hüfte abstützen. Diese Position halten.</string>
 
     <string name="sitUp">Sit-up</string>
     <string name="sitUpInstruction">Mit geradem Rücken nach oben richtung Decke schieben. Kopf in Verlängerung der Wirbelsäule. Zwischen den Übungen nicht ablegen.</string>
 
     <string name="squat">Kniebeuge</string>
-    <string name="squatInstruction">Tief in die Hocke gehen, Knie nicht vor die Zehenspitzen schieben. Bis 90°-Beugung im Knie.</string>
+    <string name="squatInstruction">Tief in die Hocke gehen, Knie nicht vor die Zehenspitzen schieben. Bis 90°-Beugung im Knie. Dann wieder in die Ausgangsstellung strecken.</string>
+
+    <string name="squatJump">Spungkniebeuge</string>
+    <string name="squatJumpInstruction">Tief in die Hocke gehen, Knie nicht vor die Zehenspitzen schieben. Bis 90°-Beugung im Knie. Aus dieser Position heraus einen hohen Sprung machen und sanft landen.</string>
 
     <string name="steps">Steps</string>
     <string name="stepsInstruction">Ein Fuß auf einer kleinen Erhöhung, der andere unten. Zwei Fußwechsel bilden einen Durchgang.</string>
 
+    <string name="superman">Superman</string>
+    <string name="supermanInstruction">Legen Sie sich bäuchlings auf den Boden, wobei die Arme nach vorne ausgestreckt werden. Heben Sie den Oberkörper mit ausgestreckten Armen und zeitgleich die ausgestreckten Beide weitmöglichst nach oben und halten Sie diese Position für einen Moment. Lassen sie Beine und Oberkörper langsam absinken.</string>
+
+    <string name="wallsitting">Wandsitzen</string>
+    <string name="wallsittingInstruction">Mit dem Rücken gegen die Wand lehnen. Die Knie beugen bis auf 90°. Die Knie dürfen dabei nicht über die Zehenspitzen kommen. Es sollten nun drei 90° Winkel am Boden, Knie und zur Wand entstanden sein. Diese Position halten.</string>
+
     <string name="wideGripPushUp">Breite Liegestütz</string>
     <string name="wideGripPushUpInstruction">Die Hände befinden sich doppelte Schulterbreite voneinander entfernt am Boden. Die Finger zeigen nach vorne, die Daumen nach innen. Durch gleichzeitiges Anspannen der Arme werden diese gestreckt und der Oberkörper hebt vom Boden ab. Das Gewicht wird gleichmäßig auf Zehenspitzen und Händen verteilt. Kopf, Hals, Wirbelsäule, Gesäß und Knie bilden eine Linie und die Bauchmuskulatur ist angespannt. Nun werden beide Arme gleichzeitig gebeugt und der Oberkörper somit abgesenkt, bis die Nasenspitze fast den Boden berührt. Der Körper bleibt dabei gestreckt.</string>
+
+    <string name="woodChopping">Holzhacken</string>
+    <string name="woodChoppingInstruction">Legen Sie sich bäuchlings auf den Boden, wobei die Arme nach vorne ausgestreckt werden. Nun abwechselnd gegengleich je ein Arm und Bein abheben und wieder senken. Als würden Sie etwas "hacken".</string>
     <!-- ... -->
 
     <!-- Fight scene -->

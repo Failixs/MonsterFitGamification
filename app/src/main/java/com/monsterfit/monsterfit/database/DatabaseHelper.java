@@ -17,7 +17,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private Context context;
 
     // Database Version
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
 
     // Database Name
     private static final String DATABASE_NAME = "exercises_db";
@@ -43,15 +43,42 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         insertExercise(db, context.getString(R.string.pushUp), Exercise.TYPE.ARMS, context.getString(R.string.pushUpInstruction), 10);
         insertExercise(db, context.getString(R.string.oneArmedPushUp), Exercise.TYPE.ARMS, context.getString(R.string.oneArmedPushUpInstruction), 43);
         insertExercise(db, context.getString(R.string.dips), Exercise.TYPE.ARMS, context.getString(R.string.dipsInstruction), 25);
+        insertExercise(db, context.getString(R.string.highPushUp), Exercise.TYPE.ARMS, context.getString(R.string.highPushUpInstruction), 20);
+        insertExercise(db, context.getString(R.string.wideGripPushUp), Exercise.TYPE.ARMS, context.getString(R.string.wideGripPushUpInstruction), 10);
+        insertExercise(db, context.getString(R.string.circlePushUps), Exercise.TYPE.ARMS, context.getString(R.string.circlePushUpsInstruction), 30);
+        insertExercise(db, context.getString(R.string.bicepsCurl), Exercise.TYPE.ARMS, context.getString(R.string.bicepsCurlInstruction), 10);
+        insertExercise(db, context.getString(R.string.clapPushUp), Exercise.TYPE.ARMS, context.getString(R.string.clapPushUpInstruction), 35);
 
-        // Exercises for TORSO
-        insertExercise(db, context.getString(R.string.pushUp), Exercise.TYPE.TORSO, context.getString(R.string.pushUpInstruction), 10);
-        insertExercise(db, context.getString(R.string.sitUp), Exercise.TYPE.TORSO, context.getString(R.string.sitUpInstruction), 20);
-        insertExercise(db, context.getString(R.string.wideGripPushUp), Exercise.TYPE.TORSO, context.getString(R.string.wideGripPushUpInstruction), 33);
 
         // Exercises for LEGS
-        insertExercise(db, context.getString(R.string.squat), Exercise.TYPE.LEGS, context.getString(R.string.squatInstruction), 15);
-        insertExercise(db, context.getString(R.string.steps), Exercise.TYPE.LEGS, context.getString(R.string.stepsInstruction) , 7);
+        insertExercise(db, context.getString(R.string.squat), Exercise.TYPE.LEGS, context.getString(R.string.squatInstruction), 7);
+        insertExercise(db, context.getString(R.string.squatJump), Exercise.TYPE.LEGS, context.getString(R.string.squatJumpInstruction), 15);
+        insertExercise(db, context.getString(R.string.wallsitting), Exercise.TYPE.LEGS, context.getString(R.string.wallsittingInstruction), 5);
+        insertExercise(db, context.getString(R.string.bridge), Exercise.TYPE.LEGS, context.getString(R.string.bridgeInstruction), 10);
+        insertExercise(db, context.getString(R.string.lunges), Exercise.TYPE.LEGS, context.getString(R.string.lungesInstruction), 15);
+        insertExercise(db, context.getString(R.string.lungesJumping), Exercise.TYPE.LEGS, context.getString(R.string.lungesJumpingInstruction), 20);
+        insertExercise(db, context.getString(R.string.lungesToTheSide), Exercise.TYPE.LEGS, context.getString(R.string.lungesToTheSideInstruction), 20);
+        insertExercise(db, context.getString(R.string.calfRaise), Exercise.TYPE.LEGS, context.getString(R.string.calfRaiseInstruction), 7);
+        insertExercise(db, context.getString(R.string.scissor), Exercise.TYPE.LEGS, context.getString(R.string.scissorInstruction), 15);
+        insertExercise(db, context.getString(R.string.fireHydrant), Exercise.TYPE.LEGS, context.getString(R.string.fireHydrantInstruction), 15);
+
+
+        // Exercises for TORSO
+        insertExercise(db, context.getString(R.string.superman), Exercise.TYPE.TORSO, context.getString(R.string.supermanInstruction), 15);
+        insertExercise(db, context.getString(R.string.steps), Exercise.TYPE.TORSO, context.getString(R.string.stepsInstruction) , 7);
+        insertExercise(db, context.getString(R.string.plankSuperman), Exercise.TYPE.TORSO, context.getString(R.string.plankSupermanInstruction) , 12);
+        insertExercise(db, context.getString(R.string.plank), Exercise.TYPE.TORSO, context.getString(R.string.plankInstruction) , 7);
+        insertExercise(db, context.getString(R.string.sitUp), Exercise.TYPE.TORSO, context.getString(R.string.sitUpInstruction) , 7);
+        insertExercise(db, context.getString(R.string.jackknife), Exercise.TYPE.TORSO, context.getString(R.string.jackknifeInstruction) , 20);
+        insertExercise(db, context.getString(R.string.sideSupport), Exercise.TYPE.TORSO, context.getString(R.string.sideSupportInstruction) , 7);
+        insertExercise(db, context.getString(R.string.reverseCrunch), Exercise.TYPE.TORSO, context.getString(R.string.reverseCrunchInstruction) , 12);
+        insertExercise(db, context.getString(R.string.scissor), Exercise.TYPE.TORSO, context.getString(R.string.scissorInstruction) , 12);
+        insertExercise(db, context.getString(R.string.mountainClimbers), Exercise.TYPE.TORSO, context.getString(R.string.mountainClimbersInstruction) , 10);
+        insertExercise(db, context.getString(R.string.bicycleCrunches), Exercise.TYPE.TORSO, context.getString(R.string.bicycleCrunchesInstruction) , 10);
+        insertExercise(db, context.getString(R.string.becklift), Exercise.TYPE.TORSO, context.getString(R.string.beckliftInstruction) , 12);
+        insertExercise(db, context.getString(R.string.beckliftLeg), Exercise.TYPE.TORSO, context.getString(R.string.beckliftLegInstruction) , 15);
+
+
     }
 
     private void createScoreTable(SQLiteDatabase db){
