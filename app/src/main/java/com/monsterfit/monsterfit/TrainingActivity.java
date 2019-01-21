@@ -93,14 +93,16 @@ public class TrainingActivity extends AppCompatActivity {
                 getSystemService(LAYOUT_INFLATER_SERVICE);
         View popupView = inflater.inflate(R.layout.popup, null);
         final TextView popupWindowText = popupView.findViewById(R.id.popupText);
+        final TextView victoryTextBox = popupView.findViewById(R.id.victoryTextView);
 
         // create the popup window
         int width = LinearLayout.LayoutParams.WRAP_CONTENT;
         int height = LinearLayout.LayoutParams.WRAP_CONTENT;
         boolean focusable = true; // lets taps outside the popup also dismiss it
         final PopupWindow popupWindow = new PopupWindow(popupView, width, height, focusable);
-
-        popupWindowText.setText(exerciseDone.getInstruction());
+        popupWindowText.setText(exerciseDone.getTitle() + "\n \n" );
+        popupWindowText.append(exerciseDone.getInstruction());
+        victoryTextBox.setText("");
 
         // show the popup window
         // which view you pass in doesn't matter, it is only used for the window tolken
@@ -116,6 +118,43 @@ public class TrainingActivity extends AppCompatActivity {
         });
     }
 
+
+    public void victoryWindow(View v){
+
+
+        // inflate the layout of the popup window
+        LayoutInflater inflater = (LayoutInflater)
+                getSystemService(LAYOUT_INFLATER_SERVICE);
+        View popupView = inflater.inflate(R.layout.popup, null);
+        final TextView popupWindowText = popupView.findViewById(R.id.popupText);
+
+        // create the popup window
+        int width = LinearLayout.LayoutParams.WRAP_CONTENT;
+        int height = LinearLayout.LayoutParams.WRAP_CONTENT;
+        boolean focusable = false; // lets taps outside the popup also dismiss it
+        final PopupWindow popupWindow = new PopupWindow(popupView, width, height, focusable);
+        popupWindowText.setText("Glückwunsch du Maschine!" + "\n \n" );
+        popupWindowText.append("Du hast das Monster besiegt!" + "\n");
+        popupWindowText.append("Klicke um fortzufahren.");
+
+        // show the popup window
+        // which view you pass in doesn't matter, it is only used for the window tolken
+        popupWindow.showAtLocation(v, Gravity.CENTER, 0, 0);
+
+        // dismiss the popup window when touched
+        popupView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                finishTheTraining();
+                return true;
+            }
+        });
+    }
+
+
+    public void finishTheTraining(){
+        finish();
+    }
     public void trainingDoneClick(View v){
         Exercise exerciseDone = selectedExercises[Integer.valueOf(v.getTag().toString())];
 
@@ -142,8 +181,7 @@ public class TrainingActivity extends AppCompatActivity {
             defeatedMonsters.setScore(defeatedMonsters.getScore() + 1);
 
             db.updateScore(defeatedMonsters);
-
-            finish();
+            victoryWindow(v);
         }
     }
 

@@ -54,7 +54,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         insertExercise(db, context.getString(R.string.squat), Exercise.TYPE.LEGS, context.getString(R.string.squatInstruction), 7);
         insertExercise(db, context.getString(R.string.squatJump), Exercise.TYPE.LEGS, context.getString(R.string.squatJumpInstruction), 15);
         insertExercise(db, context.getString(R.string.wallsitting), Exercise.TYPE.LEGS, context.getString(R.string.wallsittingInstruction), 5);
-        insertExercise(db, context.getString(R.string.becklift), Exercise.TYPE.LEGS, context.getString(R.string.beckliftLegInstruction), 10);
+        insertExercise(db, context.getString(R.string.beckliftLeg), Exercise.TYPE.LEGS, context.getString(R.string.beckliftLegInstruction), 10);
         insertExercise(db, context.getString(R.string.lunges), Exercise.TYPE.LEGS, context.getString(R.string.lungesInstruction), 15);
         insertExercise(db, context.getString(R.string.lungesJumping), Exercise.TYPE.LEGS, context.getString(R.string.lungesJumpingInstruction), 20);
         insertExercise(db, context.getString(R.string.lungesToTheSide), Exercise.TYPE.LEGS, context.getString(R.string.lungesToTheSideInstruction), 20);
@@ -75,8 +75,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         insertExercise(db, context.getString(R.string.scissor), Exercise.TYPE.TORSO, context.getString(R.string.scissorInstruction) , 12);
         insertExercise(db, context.getString(R.string.mountainClimbers), Exercise.TYPE.TORSO, context.getString(R.string.mountainClimbersInstruction) , 10);
         insertExercise(db, context.getString(R.string.bicycleCrunches), Exercise.TYPE.TORSO, context.getString(R.string.bicycleCrunchesInstruction) , 10);
-        insertExercise(db, context.getString(R.string.becklift), Exercise.TYPE.TORSO, context.getString(R.string.beckliftInstruction) , 12);
-        insertExercise(db, context.getString(R.string.beckliftLeg), Exercise.TYPE.TORSO, context.getString(R.string.beckliftLegInstruction) , 15);
+        insertExercise(db, context.getString(R.string.becklift), Exercise.TYPE.TORSO, context.getString(R.string.beckliftInstruction) , 15);
 
 
     }
