@@ -14,13 +14,14 @@
         android:id="@+id/titleView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
-        android:text="@string/title"
-        android:textColor="@color/colorButton"
+        android:background="#00000000"
         android:paddingVertical="20dp"
+        android:text="@string/title"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textColor="@color/colorAccent"
         android:textSize="50sp"
-        android:textStyle="bold"
-        android:textAlignment="center"/>
+        android:textStyle="bold" />
     <!-- layout_height will be set by runtime code -->
 
     <ScrollView
@@ -50,20 +51,20 @@
                 <Button
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:layout_margin="20dp"
+                    android:layout_weight="1"
 
-                    android:background="@color/colorButton"
+                    android:background="@color/colorAccent"
                     android:onClick="changeViewToMonsterSelection"
-                    android:text="@string/startPageLeftButton"/>
+                    android:text="@string/startPageLeftButton" />
 
                 <Button
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:layout_margin="20dp"
+                    android:layout_weight="1"
 
-                    android:background="@color/colorButton"
+                    android:background="@color/colorAccent"
                     android:text="@string/startPageRightButton" />
 
             </LinearLayout>

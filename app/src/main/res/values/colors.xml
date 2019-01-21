@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574b</color>
-    <color name="colorButton">#1ff262</color>
-    <color name="colorAccent">#1FF262</color>
+    <color name="colorPrimary">#3fad40</color>
+    <color name="colorPrimaryDark">#b79225</color>
+    <color name="colorButton">#a30704</color>
+    <color name="colorAccent">#1ff262</color>
     <color name="colorBackground">#6EACEB</color>
     <color name="background">#6EACEB</color>
+    <color name="opacBackground">#FF000000</color>
 </resources>
