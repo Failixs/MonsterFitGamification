@@ -7,6 +7,7 @@ import android.content.pm.PackageManager;
 import android.graphics.Point;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -19,6 +20,7 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,21 +33,54 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
+    private DatabaseHelper db;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
 
-        setLayout();
+        db = new DatabaseHelper(this);
 
-        setStatistics();
+        setLayout();
     }
 
     @Override
     protected void onResume(){
         super.onResume();
+        setTrainingCounts(Score.DEFEATED_ARM_MONSTERS);
+        setTrainingCounts(Score.DEFEATED_TORSO_MONSTERS);
+        setTrainingCounts(Score.DEFEATED_LEG_MONSTERS);
+        setImage();
         setStatistics();
+    }
+
+
+    /**
+     * Resetting count if last training is to long away
+     */
+    private void setTrainingCounts(String type) {
+        // Arm Monsters
+        Score score = db.getScore(type);
+        long diff = System.currentTimeMillis() - score.getLastEncounter(); // Zeit seit dem letzten Training
+        if (diff > 100000) //TODO eine Woche in ms (Hier: 100s)
+        {
+            score.setCount(0);
+        }
+        else if (diff > 20000){ //TODO Länger als 3 Tage (Hier: 20s)
+            score.setCount(1);
+        }
+
+        db.updateScore(score);
+    }
+
+    /**
+     * setting the image according to the trainings count
+     */
+    private void setImage(){
+        ImageView usersPicture = findViewById(R.id.usersPicture);
+        usersPicture.setImageResource(getResources().getIdentifier(getImageResourceName(),"drawable", getPackageName()));
     }
 
     /**
@@ -68,6 +103,7 @@ public class MainActivity extends AppCompatActivity {
         titleView.setLayoutParams(new LinearLayout.LayoutParams(params));
 
         ImageView usersPicture = findViewById(R.id.usersPicture);
+        usersPicture.setImageResource(getResources().getIdentifier(getImageResourceName(),"drawable", getPackageName()));
         params = usersPicture.getLayoutParams();
         params.height = (int)Math.ceil(height * 0.6);
         usersPicture.setLayoutParams(new LinearLayout.LayoutParams(params));
@@ -78,9 +114,32 @@ public class MainActivity extends AppCompatActivity {
         startPageButtons.setLayoutParams(new LinearLayout.LayoutParams(params));
     }
 
-    private void setStatistics(){
+    /**
+     * gets the name of the image:
+     * @return img + first digit for arms + second digit for torso + third digit for legs
+     */
+    private String getImageResourceName() {
+        return "img"
+                + getImageIndex(db.getScore(Score.DEFEATED_ARM_MONSTERS).getCount())
+                + getImageIndex(db.getScore(Score.DEFEATED_TORSO_MONSTERS).getCount())
+                + getImageIndex(db.getScore(Score.DEFEATED_LEG_MONSTERS).getCount());
+    }
 
-        DatabaseHelper db = new DatabaseHelper(this);
+    /**
+     * gets an index for each type
+     * @param count of a specified type
+     * @return index
+     */
+    private String getImageIndex(int count) {
+        if(count == 0) return "1";
+        else if(count <= 4) return "2";
+        else return "3";
+    }
+
+    /**
+     * sets all statistics
+     */
+    private void setStatistics(){
 
         LinearLayout layout = findViewById(R.id.statisticsLayout);
         layout.removeAllViews();
@@ -203,8 +262,6 @@ public class MainActivity extends AppCompatActivity {
 
             layout.addView(scoreLayout);
         }
-
-
     }
 
     public void changeViewToMonsterSelection(View v){

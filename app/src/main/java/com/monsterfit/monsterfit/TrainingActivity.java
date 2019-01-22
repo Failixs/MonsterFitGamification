@@ -177,9 +177,9 @@ public class TrainingActivity extends AppCompatActivity {
 
         // Killing the monster
         if(currentHealth <= 0){
-
             defeatedMonsters.setScore(defeatedMonsters.getScore() + 1);
-
+            defeatedMonsters.setLastEncounter(System.currentTimeMillis());
+            defeatedMonsters.incrementCount();
             db.updateScore(defeatedMonsters);
             victoryWindow(v);
         }
