@@ -17,7 +17,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private Context context;
 
     // Database Version
-    private static final int DATABASE_VERSION = 2;
+    private static final int DATABASE_VERSION = 3;
 
     // Database Name
     private static final String DATABASE_NAME = "exercises_db";
@@ -97,6 +97,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         // Create tables again
         createExerciseTable(db);
+
+        if(oldVersion < 3){
+            db.execSQL("DROP TABLE IF EXISTS " + Score.TABLE_NAME);
+            createScoreTable(db);
+        }
     }
 
     // Methods for exercises
