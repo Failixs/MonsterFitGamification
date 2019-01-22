@@ -37,7 +37,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     private void createExerciseTable(SQLiteDatabase db){
         db.execSQL(Exercise.CREATE_TABLE);
-        Resources system = Resources.getSystem();
 
         // Exercises for ARMS
         insertExercise(db, context.getString(R.string.pushUp), Exercise.TYPE.ARMS, context.getString(R.string.pushUpInstruction), 10);
@@ -83,12 +82,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     private void createScoreTable(SQLiteDatabase db){
         db.execSQL(Score.CREATE_TABLE);
-        Resources system = Resources.getSystem();
         insertScore(db, Score.TIME_INSTALLED, context.getString(R.string.timeInstalled), System.currentTimeMillis());
-        insertScore(db, Score.TIME_WORKED_OUT, context.getString(R.string.timeWorkedOut), 0);
-        insertScore(db, Score.DEFEATED_ARM_MONSTERS, context.getString(R.string.defeatedLacertmons), 0);
-        insertScore(db, Score.DEFEATED_TORSO_MONSTERS, context.getString(R.string.defeatedTruncmons), 0);
-        insertScore(db, Score.DEFEATED_LEG_MONSTERS, context.getString(R.string.defeatedCrusmons), 0);
+        insertScore(db, Score.TIME_WORKED_OUT, context.getString(R.string.timeWorkedOut));
+        insertScore(db, Score.DEFEATED_ARM_MONSTERS, context.getString(R.string.defeatedLacertmons));
+        insertScore(db, Score.DEFEATED_TORSO_MONSTERS, context.getString(R.string.defeatedTruncmons));
+        insertScore(db, Score.DEFEATED_LEG_MONSTERS, context.getString(R.string.defeatedCrusmons));
     }
 
     // Upgrading database
@@ -146,6 +144,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     // Methods for scores
+    private void insertScore(SQLiteDatabase db, String name, String description){
+        ContentValues values = new ContentValues();
+        values.put(Score.COLUMN_NAME, name);
+        values.put(Score.COLUMN_DESCRIPTION, description);
+        db.insert(Score.TABLE_NAME, null, values);
+    }
+
     private void insertScore(SQLiteDatabase db, String name, String description, long score){
         ContentValues values = new ContentValues();
         values.put(Score.COLUMN_NAME, name);
@@ -167,7 +172,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 score = new Score(cursor.getInt(cursor.getColumnIndex(Score.COLUMN_ID)),
                         cursor.getString(cursor.getColumnIndex(Score.COLUMN_NAME)),
                         cursor.getString(cursor.getColumnIndex(Score.COLUMN_DESCRIPTION)),
-                        cursor.getLong(cursor.getColumnIndex(Score.COLUMN_SCORE)));
+                        cursor.getLong(cursor.getColumnIndex(Score.COLUMN_SCORE)),
+                        cursor.getLong(cursor.getColumnIndex(Score.COLUMN_LASTENCOUNTER)),
+                        cursor.getInt(cursor.getColumnIndex(Score.COLUMN_COUNT)));
         }
 
         db.close();
@@ -188,7 +195,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 scores.add(new Score(cursor.getInt(cursor.getColumnIndex(Score.COLUMN_ID)),
                         cursor.getString(cursor.getColumnIndex(Score.COLUMN_NAME)),
                         cursor.getString(cursor.getColumnIndex(Score.COLUMN_DESCRIPTION)),
-                        cursor.getLong(cursor.getColumnIndex(Score.COLUMN_SCORE))));
+                        cursor.getLong(cursor.getColumnIndex(Score.COLUMN_SCORE)),
+                        cursor.getLong(cursor.getColumnIndex(Score.COLUMN_LASTENCOUNTER)),
+                        cursor.getInt(cursor.getColumnIndex(Score.COLUMN_COUNT))));
             } while (cursor.moveToNext());
         }
 
@@ -201,7 +210,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(Score.COLUMN_SCORE, score.getScore());
-
+        values.put(Score.COLUMN_LASTENCOUNTER, score.getLastEncounter());
+        values.put(Score.COLUMN_COUNT, score.getCount());
         db.update(Score.TABLE_NAME, values, Score.COLUMN_ID + " = ?", new String[]{String.valueOf(score.getId())});
         db.close();
     }
