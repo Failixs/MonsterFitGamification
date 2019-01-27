@@ -75,5 +75,9 @@ public class Score {
 
     public void incrementCount(){count += 1; }
 
-    public void setCount(int count) {this.count = count; }
+    /**
+     * Sets the count down to the param, if it's lower than before
+     * @param count
+     */
+    public void setCount(int count) { this.count = Math.min(count, this.count); }
 }

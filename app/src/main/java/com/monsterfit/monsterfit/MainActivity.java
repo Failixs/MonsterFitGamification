@@ -64,12 +64,21 @@ public class MainActivity extends AppCompatActivity {
         // Arm Monsters
         Score score = db.getScore(type);
         long diff = System.currentTimeMillis() - score.getLastEncounter(); // Zeit seit dem letzten Training
-        if (diff > 100000) //TODO eine Woche in ms (Hier: 100s)
+        if (diff > 6.048e+8) // eine Woche in ms
         {
             score.setCount(0);
         }
-        else if (diff > 20000){ //TODO Länger als 3 Tage (Hier: 20s)
+        else if (diff > 5.184e+8){ // Länger als 6 Tage
             score.setCount(1);
+        }
+        else if (diff > 4.32e+8){ // Länger als 5 Tage
+            score.setCount(2);
+        }
+        else if (diff > 3.456e+8){ // Länger als 4 Tage
+            score.setCount(3);
+        }
+        else if (diff > 2.592e+8){ // Länger als 3 Tage
+            score.setCount(4);
         }
 
         db.updateScore(score);
