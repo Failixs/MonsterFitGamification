@@ -1,39 +1,27 @@
 package com.monsterfit.monsterfit;
 
 import android.content.Intent;
-import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
 import android.graphics.Point;
 import android.graphics.Typeface;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
+import android.support.constraint.ConstraintSet;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.Display;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.monsterfit.monsterfit.database.DatabaseHelper;
-import com.monsterfit.monsterfit.database.Exercise;
 import com.monsterfit.monsterfit.database.Score;
-
-import java.io.File;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
     private DatabaseHelper db;
+    private int index;      // For the ids of the statistik text views
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,6 +78,15 @@ public class MainActivity extends AppCompatActivity {
     private void setImage(){
         ImageView usersPicture = findViewById(R.id.usersPicture);
         usersPicture.setImageResource(getResources().getIdentifier(getImageResourceName(),"drawable", getPackageName()));
+
+        ImageView lacertBadge = findViewById(R.id.lacertBadge);
+        lacertBadge.setImageResource(getBadgeResource(db.getScore(Score.DEFEATED_ARM_MONSTERS).getCount()));
+
+        ImageView truncBadge = findViewById(R.id.truncBadge);
+        truncBadge.setImageResource(getBadgeResource(db.getScore(Score.DEFEATED_TORSO_MONSTERS).getCount()));
+
+        ImageView crusBadge = findViewById(R.id.crusBadge);
+        crusBadge.setImageResource(getBadgeResource(db.getScore(Score.DEFEATED_LEG_MONSTERS).getCount()));
     }
 
     /**
@@ -102,25 +99,68 @@ public class MainActivity extends AppCompatActivity {
         Point size = new Point();
         display.getSize(size);
         int height = size.y;
+        int width = size.x;
 
-        ViewGroup.LayoutParams params;
+        ConstraintLayout.LayoutParams params;
 
         // resize the views
         TextView titleView = findViewById(R.id.titleView);
-        params = titleView.getLayoutParams();
+        params = (ConstraintLayout.LayoutParams) titleView.getLayoutParams();
         params.height = (int)Math.ceil(height * 0.2);
-        titleView.setLayoutParams(new LinearLayout.LayoutParams(params));
+        titleView.setLayoutParams(new ConstraintLayout.LayoutParams(params));
+
+        View titleShadowView = findViewById(R.id.titleShadowView);
+        params = (ConstraintLayout.LayoutParams) titleShadowView.getLayoutParams();
+        params.height = (int)Math.ceil(height * 0.2);
+        titleShadowView.setLayoutParams(new ConstraintLayout.LayoutParams(params));
+
+        ImageView lacertBadge = findViewById(R.id.lacertBadge);
+        lacertBadge.setImageResource(getBadgeResource(db.getScore(Score.DEFEATED_ARM_MONSTERS).getCount()));
+        params = (ConstraintLayout.LayoutParams) lacertBadge.getLayoutParams();
+        params.height = (int)Math.ceil(height * 0.2);
+        params.width = (int)Math.ceil(width * 0.2);
+        lacertBadge.setLayoutParams(new ConstraintLayout.LayoutParams(params));
+
+        ImageView truncBadge = findViewById(R.id.truncBadge);
+        truncBadge.setImageResource(getBadgeResource(db.getScore(Score.DEFEATED_TORSO_MONSTERS).getCount()));
+        params = (ConstraintLayout.LayoutParams) truncBadge.getLayoutParams();
+        params.height = (int)Math.ceil(height * 0.2);
+        params.width = (int)Math.ceil(width * 0.2);
+        truncBadge.setLayoutParams(new ConstraintLayout.LayoutParams(params));
+
+        ImageView crusBadge = findViewById(R.id.crusBadge);
+        crusBadge.setImageResource(getBadgeResource(db.getScore(Score.DEFEATED_LEG_MONSTERS).getCount()));
+        params = (ConstraintLayout.LayoutParams) crusBadge.getLayoutParams();
+        params.height = (int)Math.ceil(height * 0.2);
+        params.width = (int)Math.ceil(width * 0.2);
+        crusBadge.setLayoutParams(new ConstraintLayout.LayoutParams(params));
 
         ImageView usersPicture = findViewById(R.id.usersPicture);
         usersPicture.setImageResource(getResources().getIdentifier(getImageResourceName(),"drawable", getPackageName()));
-        params = usersPicture.getLayoutParams();
+        params = (ConstraintLayout.LayoutParams) usersPicture.getLayoutParams();
         params.height = (int)Math.ceil(height * 0.6);
-        usersPicture.setLayoutParams(new LinearLayout.LayoutParams(params));
+        params.width = (int)Math.ceil(width * 0.8 - 30);
+        usersPicture.setLayoutParams(new ConstraintLayout.LayoutParams(params));
 
-        LinearLayout startPageButtons = findViewById(R.id.startPageButtons);
-        params = startPageButtons.getLayoutParams();
+        ConstraintLayout startPageButtons = findViewById(R.id.startPageButtons);
+        params = (ConstraintLayout.LayoutParams) startPageButtons.getLayoutParams();
         params.height = (int)Math.ceil(height * 0.2);
-        startPageButtons.setLayoutParams(new LinearLayout.LayoutParams(params));
+        startPageButtons.setLayoutParams(new ConstraintLayout.LayoutParams(params));
+    }
+
+    /**
+     * Gets the badge style
+     * @param count
+     * @return
+     */
+    private int getBadgeResource(int count){
+        if(count > 250)
+            return R.drawable.gold;
+        else if(count > 100)
+            return R.drawable.silver;
+        else if(count > 10)
+            return R.drawable.bronze;
+        else return android.R.color.transparent;
     }
 
     /**
@@ -150,97 +190,72 @@ public class MainActivity extends AppCompatActivity {
      */
     private void setStatistics(){
 
-        LinearLayout layout = findViewById(R.id.statisticsLayout);
+        ConstraintLayout layout = findViewById(R.id.statisticsLayout);
         layout.removeAllViews();
 
-        TextView statisticsTextView = new TextView(this);
-        statisticsTextView.setLayoutParams( new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, 1.0f));
-        statisticsTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 24);
+        ConstraintSet set = new ConstraintSet();
+
+        index = 42;
+
+        TextView statisticsTextView = getTextView(24, getString(R.string.statistics));
         statisticsTextView.setTypeface(Typeface.SERIF, Typeface.BOLD_ITALIC);
-        statisticsTextView.setText(getString(R.string.statistics));
         layout.addView(statisticsTextView);
 
-        List<Score> scores = db.getScores();
-        for(Score score : scores){
-            // The green Line
-            View view = new View(this);
-            view.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 1));
-            view.setBackgroundResource(R.color.colorButton);
-            layout.addView(view);
+        TextView installedTextView = getTextView(18, db.getScore(Score.TIME_INSTALLED).getDescription());
+        layout.addView(installedTextView);
 
-            LinearLayout scoreLayout = new LinearLayout(this);
-            scoreLayout.setLayoutParams( new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-            scoreLayout.setOrientation(LinearLayout.HORIZONTAL);
+        TextView installedScoreView = getTextView(18, formatInstalledScoreString());
+        layout.addView(installedScoreView);
 
-            LinearLayout descriptionLayout = new LinearLayout(this);
-            descriptionLayout.setLayoutParams( new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, 1.0f));
-            descriptionLayout.setOrientation(LinearLayout.HORIZONTAL);
+        TextView workOutTextView = getTextView(18, db.getScore(Score.TIME_WORKED_OUT).getDescription());
+        layout.addView(workOutTextView);
 
-            // The little images in front of the monster descriptions
-            ImageView image = new ImageView(this);
-            image.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, 0.7f));
-            switch(score.getName()){
-                case Score.DEFEATED_ARM_MONSTERS:
-                    image.setBackgroundResource(R.drawable.nockchan);
-                    descriptionLayout.addView(image);
-                    break;
-                case Score.DEFEATED_TORSO_MONSTERS:
-                    image.setBackgroundResource(R.drawable.machomei);
-                    descriptionLayout.addView(image);
-                    break;
-                case Score.DEFEATED_LEG_MONSTERS:
-                    image.setBackgroundResource(R.drawable.kicklee);
-                    descriptionLayout.addView(image);
-                    break;
-                    default:
-                        break;
-            }
+        TextView workOutScoreView = getTextView(18, formatWorkoutScoreString());
+        layout.addView(workOutScoreView);
 
-            // The description of each score
-            TextView descriptionTextView = new TextView(this);
-            descriptionTextView.setLayoutParams( new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, 0.3f));
-            descriptionTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
-            descriptionTextView.setText(score.getDescription());
-            descriptionLayout.addView(descriptionTextView);
+        TextView lacertmonDescriptionView = getTextView(18, db.getScore(Score.DEFEATED_ARM_MONSTERS).getDescription());
+        layout.addView(lacertmonDescriptionView);
 
-            scoreLayout.addView(descriptionLayout);
+        ImageView lacertmonImage = new ImageView(this);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+            lacertmonImage.setId(lacertmonImage.generateViewId());
+        } else lacertmonImage.setId(index + 1000);
+        lacertmonImage.setLayoutParams(new ViewGroup.LayoutParams(0, 0));
+        lacertmonImage.setBackgroundResource(R.drawable.nockchan);
+        layout.addView(lacertmonImage);
 
-            // The score value
-            TextView scoreTextView = new TextView(this);
-            scoreTextView.setLayoutParams( new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, 1.0f));
-            scoreTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
-            String scoreStr = "";
-            switch(score.getName()){
-                case Score.TIME_INSTALLED:
-                    long difference = System.currentTimeMillis() - score.getScore();
-                    int dayCount = (int)(difference / 86400000);
-                    scoreStr += (dayCount <= 0) ? "" : String.valueOf(dayCount) + " Tag" + ((dayCount == 1) ? ", " : "en, ");
-                    difference %= 86400000;
-                    int hourCount = (int)(difference / 3600000);
-                    scoreStr += String.valueOf(hourCount) + " Stunde"  + ((hourCount == 1) ? "" : "n");
-                    break;
-                case Score.TIME_WORKED_OUT:
-                    long temp = score.getScore();
-                    dayCount = (int)(temp / 86400000);
-                    scoreStr += (dayCount <= 0) ? "" : String.valueOf(dayCount) + " Tag" + ((dayCount == 1) ? ", " : "e, ");
-                    temp %= 86400000;
-                    hourCount = (int)(temp / 3600000);
-                    scoreStr += (hourCount <= 0) ? "" : String.valueOf(hourCount) + " Stunde" + ((hourCount == 1) ? ", " : "n, ");
-                    temp %= 3600000;
-                    int minuteCount = (int)(temp / 60000);
-                    scoreStr += (minuteCount <= 0) ? "" : String.valueOf(minuteCount) + " Minute" + ((minuteCount == 1) ? ", " : "n, ");
-                    temp %= 60000;
-                    int secondCount = (int)(temp / 1000);
-                    scoreStr += String.valueOf(secondCount) + " Sekunde"  + ((secondCount == 1) ? "" : "n");
-                    break;
-                default: //e.g. monsters defeated
-                    scoreStr = String.valueOf(score.getScore());
-            }
-            scoreTextView.setText(scoreStr);
-            scoreLayout.addView(scoreTextView);
+        TextView lacertmonScoreView = getTextView(18, String.valueOf(db.getScore(Score.DEFEATED_ARM_MONSTERS).getScore()));
+        layout.addView(lacertmonScoreView);
 
-            layout.addView(scoreLayout);
-        }
+
+
+
+        set.clone(layout);
+        set.connect(statisticsTextView.getId(), ConstraintSet.TOP, layout.getId(), ConstraintSet.TOP);
+        set.connect(statisticsTextView.getId(), ConstraintSet.LEFT, layout.getId(), ConstraintSet.LEFT);
+
+        set.connect(installedTextView.getId(), ConstraintSet.TOP, statisticsTextView.getId(), ConstraintSet.BOTTOM);
+        set.connect(installedScoreView.getId(), ConstraintSet.TOP, installedTextView.getId(), ConstraintSet.TOP);
+        set.createHorizontalChain(ConstraintSet.PARENT_ID, ConstraintSet.LEFT, ConstraintSet.PARENT_ID, ConstraintSet.RIGHT, new int[]{installedTextView.getId(), installedScoreView.getId()}, new float[]{1,1}, ConstraintSet.CHAIN_SPREAD_INSIDE );
+
+        set.connect(workOutTextView.getId(), ConstraintSet.TOP, installedTextView.getId(), ConstraintSet.BOTTOM);
+        set.connect(workOutScoreView.getId(), ConstraintSet.TOP, workOutTextView.getId(), ConstraintSet.TOP);
+        set.createHorizontalChain(ConstraintSet.PARENT_ID, ConstraintSet.LEFT, ConstraintSet.PARENT_ID, ConstraintSet.RIGHT, new int[]{workOutTextView.getId(), workOutScoreView.getId()}, new float[]{1,1}, ConstraintSet.CHAIN_SPREAD_INSIDE );
+
+        set.connect(lacertmonDescriptionView.getId(), ConstraintSet.TOP, workOutTextView.getId(), ConstraintSet.BOTTOM);
+        set.connect(lacertmonImage.getId(), ConstraintSet.TOP, lacertmonDescriptionView.getId(), ConstraintSet.TOP);
+        set.connect(lacertmonImage.getId(), ConstraintSet.BOTTOM, lacertmonDescriptionView.getId(), ConstraintSet.BOTTOM);
+        set.connect(lacertmonScoreView.getId(), ConstraintSet.TOP, lacertmonDescriptionView.getId(), ConstraintSet.TOP);
+        set.createHorizontalChain(ConstraintSet.PARENT_ID, ConstraintSet.LEFT, ConstraintSet.PARENT_ID, ConstraintSet.RIGHT, new int[]{lacertmonDescriptionView.getId(), lacertmonImage.getId(), lacertmonScoreView.getId()}, new float[]{0.7f,0.3f,1}, ConstraintSet.CHAIN_SPREAD_INSIDE );
+        set.applyTo(layout);
+
+        /* View greenLine = setGreenLine(layout, workOutTextView);
+
+        TextView lastView = setMonsterStatistics(layout, workOutTextView, Score.DEFEATED_ARM_MONSTERS);
+        lastView = setMonsterStatistics(layout, lastView, Score.DEFEATED_TORSO_MONSTERS);
+        setMonsterStatistics(layout, lastView, Score.DEFEATED_LEG_MONSTERS);
+
+        /*
 
         List<Exercise> exercises = db.getExerciseByType(Exercise.TYPE.NONE);
 
@@ -270,7 +285,119 @@ public class MainActivity extends AppCompatActivity {
             scoreLayout.addView(scoreTextView);
 
             layout.addView(scoreLayout);
+        }*/
+    }
+
+
+
+
+    private TextView getTextView(int textSize, String text) {
+        TextView tv = new TextView(this);
+        tv.setLayoutParams( new ViewGroup.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT));
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+            tv.setId(tv.generateViewId());
+        } else tv.setId(index);
+        tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize);
+        tv.setText(text);
+
+        index += 1;
+
+        return tv;
+    }
+
+    private String formatInstalledScoreString() {
+        String scoreStr = "";
+        long difference = System.currentTimeMillis() - db.getScore(Score.TIME_INSTALLED).getScore();
+        int dayCount = (int)(difference / 86400000);
+        scoreStr += (dayCount <= 0) ? "" : String.valueOf(dayCount) + " Tag" + ((dayCount == 1) ? ", " : "en, ");
+        difference %= 86400000;
+        int hourCount = (int)(difference / 3600000);
+        scoreStr += String.valueOf(hourCount) + " Stunde"  + ((hourCount == 1) ? "" : "n");
+
+        return scoreStr;
+    }
+
+    private String formatWorkoutScoreString() {
+        String scoreStr = "";
+
+        long temp = db.getScore(Score.TIME_WORKED_OUT).getScore();
+        int dayCount = (int)(temp / 86400000);
+        scoreStr += (dayCount <= 0) ? "" : String.valueOf(dayCount) + " Tag" + ((dayCount == 1) ? ", " : "e, ");
+        temp %= 86400000;
+        int hourCount = (int)(temp / 3600000);
+        scoreStr += (hourCount <= 0) ? "" : String.valueOf(hourCount) + " Stunde" + ((hourCount == 1) ? ", " : "n, ");
+        temp %= 3600000;
+        int minuteCount = (int)(temp / 60000);
+        scoreStr += (minuteCount <= 0) ? "" : String.valueOf(minuteCount) + " Minute" + ((minuteCount == 1) ? ", " : "n, ");
+        temp %= 60000;
+        int secondCount = (int)(temp / 1000);
+        scoreStr += String.valueOf(secondCount) + " Sekunde"  + ((secondCount == 1) ? "" : "n");
+
+        return scoreStr;
+    }
+
+    private View setGreenLine(ConstraintLayout parent, TextView viewToAttach) {
+        View view = new View(this);
+        view.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 1));
+        view.setBackgroundResource(R.color.colorButton);
+        parent.addView(view);
+
+        ConstraintSet set = new ConstraintSet();
+        set.clone(parent);
+        set.connect(view.getId(), ConstraintSet.TOP, viewToAttach.getId(), ConstraintSet.BOTTOM);
+        set.applyTo(parent);
+
+        return view;
+    }
+
+    private TextView setMonsterStatistics(ConstraintLayout parent, TextView viewToAttach, String type) {
+        return null;
+        /*
+        TextView monsterDescriptionView = getTextView(18, db.getScore(type).getDescription());
+        parent.addView(monsterDescriptionView);
+
+        ImageView image = new ImageView(this);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+            image.setId(image.generateViewId());
+        } else image.setId(index + 1000);
+        image.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+        switch(type) {
+            case Score.DEFEATED_ARM_MONSTERS:
+                image.setBackgroundResource(R.drawable.nockchan);
+                break;
+            case Score.DEFEATED_TORSO_MONSTERS:
+                image.setBackgroundResource(R.drawable.machomei);
+                break;
+            case Score.DEFEATED_LEG_MONSTERS:
+                image.setBackgroundResource(R.drawable.kicklee);
+                break;
         }
+        parent.addView(image);
+
+        TextView monsterScoreView = getTextView(18, String.valueOf(db.getScore(type).getScore()));
+        parent.addView(monsterScoreView);
+
+        ConstraintSet set = new ConstraintSet();
+        set.clone(parent);
+        set.connect(monsterDescriptionView.getId(), ConstraintSet.TOP, viewToAttach.getId(), ConstraintSet.BOTTOM);
+        set.connect(monsterDescriptionView.getId(), ConstraintSet.LEFT, parent.getId(), ConstraintSet.LEFT);
+
+        set.connect(installedTextView.getId(), ConstraintSet.TOP, statisticsTextView.getId(), ConstraintSet.BOTTOM);
+        set.connect(installedTextView.getId(), ConstraintSet.LEFT, layout.getId(), ConstraintSet.LEFT);
+        set.connect(installedTextView.getId(), ConstraintSet.RIGHT, installedScoreView.getId(), ConstraintSet.LEFT);
+        set.connect(installedScoreView.getId(), ConstraintSet.TOP, installedTextView.getId(), ConstraintSet.TOP);
+        set.connect(installedScoreView.getId(), ConstraintSet.LEFT, installedTextView.getId(), ConstraintSet.RIGHT);
+        set.connect(installedScoreView.getId(), ConstraintSet.RIGHT, layout.getId(), ConstraintSet.RIGHT);
+
+        set.connect(workOutTextView.getId(), ConstraintSet.TOP, installedTextView.getId(), ConstraintSet.BOTTOM);
+        set.connect(workOutTextView.getId(), ConstraintSet.LEFT, layout.getId(), ConstraintSet.LEFT);
+        set.connect(workOutTextView.getId(), ConstraintSet.RIGHT, workOutScoreView.getId(), ConstraintSet.LEFT);
+        set.connect(workOutScoreView.getId(), ConstraintSet.TOP, workOutTextView.getId(), ConstraintSet.TOP);
+        set.connect(workOutScoreView.getId(), ConstraintSet.LEFT, workOutTextView.getId(), ConstraintSet.RIGHT);
+        set.connect(workOutScoreView.getId(), ConstraintSet.RIGHT, layout.getId(), ConstraintSet.RIGHT);
+        set.applyTo(parent);
+        */
+
     }
 
     public void changeViewToMonsterSelection(View v){

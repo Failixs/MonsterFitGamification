@@ -4,7 +4,7 @@
 
     <!-- Start page -->
     <string name="title">Monster Fit</string>
-    <string name="startPageLeftButton">Arcade</string>
+    <string name="startPageLeftButton">Training!</string>
     <string name="startPageRightButton">VS</string>
 
     <!-- Statistics/Scores -->
