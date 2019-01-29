@@ -83,14 +83,26 @@ public class MainActivity extends AppCompatActivity {
         ImageView usersPicture = findViewById(R.id.usersPicture);
         usersPicture.setImageResource(getResources().getIdentifier(getImageResourceName(),"drawable", getPackageName()));
 
+        int resource = getBadgeResource(db.getScore(Score.DEFEATED_ARM_MONSTERS).getCount());
         ImageView lacertBadge = findViewById(R.id.lacertBadge);
-        lacertBadge.setImageResource(getBadgeResource(db.getScore(Score.DEFEATED_ARM_MONSTERS).getCount()));
+        lacertBadge.setImageResource(resource);
+        TextView lacertBadgeText = findViewById(R.id.lacertBadgeText);
+        if(resource != android.R.color.transparent)
+            lacertBadgeText.setVisibility(View.VISIBLE);
 
+        resource = getBadgeResource(db.getScore(Score.DEFEATED_TORSO_MONSTERS).getCount());
         ImageView truncBadge = findViewById(R.id.truncBadge);
-        truncBadge.setImageResource(getBadgeResource(db.getScore(Score.DEFEATED_TORSO_MONSTERS).getCount()));
+        truncBadge.setImageResource(resource);
+        TextView truncBadgeText = findViewById(R.id.truncBadgeText);
+        if(resource != android.R.color.transparent)
+            truncBadgeText.setVisibility(View.VISIBLE);
 
+        resource = getBadgeResource(db.getScore(Score.DEFEATED_LEG_MONSTERS).getCount());
         ImageView crusBadge = findViewById(R.id.crusBadge);
-        crusBadge.setImageResource(getBadgeResource(db.getScore(Score.DEFEATED_LEG_MONSTERS).getCount()));
+        crusBadge.setImageResource(resource);
+        TextView crusBadgeText = findViewById(R.id.crusBadgeText);
+        if(resource != android.R.color.transparent)
+            crusBadgeText.setVisibility(View.VISIBLE);
     }
 
     /**
@@ -158,11 +170,11 @@ public class MainActivity extends AppCompatActivity {
      * @return badge resource as int
      */
     private int getBadgeResource(int count){
-        if(count > 250)
+        if(count >= 250)
             return R.drawable.gold;
-        else if(count > 100)
+        else if(count >= 100)
             return R.drawable.silver;
-        else if(count > 10)
+        else if(count >= 10)
             return R.drawable.bronze;
         else return android.R.color.transparent;
     }
