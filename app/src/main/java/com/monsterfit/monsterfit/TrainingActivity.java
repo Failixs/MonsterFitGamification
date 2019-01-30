@@ -205,16 +205,16 @@ public class TrainingActivity extends AppCompatActivity {
         ImageView monster = findViewById(R.id.monster);
         switch(tag){
             case LEGS:
-                monster.setImageResource(R.drawable.kicklee);
+                monster.setImageResource(R.drawable.octo);
                 break;
             case TORSO:
-                monster.setImageResource(R.drawable.machomei);
+                monster.setImageResource(R.drawable.cobra);
                 break;
             case ARMS:
-                monster.setImageResource(R.drawable.nockchan);
+                monster.setImageResource(R.drawable.gorilla);
                 break;
             default:
-                monster.setImageResource(R.drawable.machomei);
+                monster.setImageResource(R.drawable.cobra);
                 break;
         }
     }

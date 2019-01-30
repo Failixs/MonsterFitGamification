@@ -245,7 +245,7 @@ public class MainActivity extends AppCompatActivity {
         index += 1;
         lacertmonImage.setAdjustViewBounds(true);
         lacertmonImage.setLayoutParams(new ViewGroup.LayoutParams(100, 100));
-        lacertmonImage.setBackgroundResource(R.drawable.nockchan);
+        lacertmonImage.setBackgroundResource(R.drawable.gorilla);
         layout.addView(lacertmonImage);
 
         TextView lacertmonScoreView = getTextView(18, String.valueOf(db.getScore(Score.DEFEATED_ARM_MONSTERS).getScore()), Gravity.END);
@@ -265,7 +265,7 @@ public class MainActivity extends AppCompatActivity {
         index += 1;
         truncmonImage.setAdjustViewBounds(true);
         truncmonImage.setLayoutParams(new ViewGroup.LayoutParams(100, 100));
-        truncmonImage.setBackgroundResource(R.drawable.machomei);
+        truncmonImage.setBackgroundResource(R.drawable.cobra);
         layout.addView(truncmonImage);
 
         TextView truncmonScoreView = getTextView(18, String.valueOf(db.getScore(Score.DEFEATED_TORSO_MONSTERS).getScore()), Gravity.END);
@@ -285,7 +285,7 @@ public class MainActivity extends AppCompatActivity {
         index += 1;
         crusmonImage.setAdjustViewBounds(true);
         crusmonImage.setLayoutParams(new ViewGroup.LayoutParams(100, 100));
-        crusmonImage.setBackgroundResource(R.drawable.kicklee);
+        crusmonImage.setBackgroundResource(R.drawable.octo);
         layout.addView(crusmonImage);
 
         TextView crusmonScoreView = getTextView(18, String.valueOf(db.getScore(Score.DEFEATED_LEG_MONSTERS).getScore()), Gravity.END);

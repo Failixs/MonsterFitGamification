@@ -13,7 +13,7 @@
         android:layout_height="match_parent"
         android:onClick="changeViewToTrainingActivity"
         android:tag="TORSO"
-        android:src="@drawable/machomei"
+        android:src="@drawable/cobra"
         android:scaleType="fitCenter"
         android:background="@color/background"
         android:contentDescription="@string/torsoOpp" />
@@ -24,7 +24,7 @@
         android:layout_height="match_parent"
         android:onClick="changeViewToTrainingActivity"
         android:tag="ARMS"
-        android:src="@drawable/nockchan"
+        android:src="@drawable/gorilla"
         android:scaleType="fitCenter"
         android:background="@color/background"
         android:contentDescription="@string/armOpp" />
@@ -35,7 +35,7 @@
         android:layout_height="match_parent"
         android:onClick="changeViewToTrainingActivity"
         android:tag="LEGS"
-        android:src="@drawable/kicklee"
+        android:src="@drawable/octo"
         android:scaleType="fitCenter"
         android:background="@color/background"
         android:contentDescription="@string/legOpp" />
