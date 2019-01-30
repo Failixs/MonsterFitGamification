@@ -83,21 +83,21 @@ public class MainActivity extends AppCompatActivity {
         ImageView usersPicture = findViewById(R.id.usersPicture);
         usersPicture.setImageResource(getResources().getIdentifier(getImageResourceName(),"drawable", getPackageName()));
 
-        int resource = getBadgeResource(db.getScore(Score.DEFEATED_ARM_MONSTERS).getCount());
+        int resource = getBadgeResource((int)db.getScore(Score.DEFEATED_ARM_MONSTERS).getScore());
         ImageView lacertBadge = findViewById(R.id.lacertBadge);
         lacertBadge.setImageResource(resource);
         TextView lacertBadgeText = findViewById(R.id.lacertBadgeText);
         if(resource != android.R.color.transparent)
             lacertBadgeText.setVisibility(View.VISIBLE);
 
-        resource = getBadgeResource(db.getScore(Score.DEFEATED_TORSO_MONSTERS).getCount());
+        resource = getBadgeResource((int)db.getScore(Score.DEFEATED_TORSO_MONSTERS).getScore());
         ImageView truncBadge = findViewById(R.id.truncBadge);
         truncBadge.setImageResource(resource);
         TextView truncBadgeText = findViewById(R.id.truncBadgeText);
         if(resource != android.R.color.transparent)
             truncBadgeText.setVisibility(View.VISIBLE);
 
-        resource = getBadgeResource(db.getScore(Score.DEFEATED_LEG_MONSTERS).getCount());
+        resource = getBadgeResource((int)db.getScore(Score.DEFEATED_LEG_MONSTERS).getScore());
         ImageView crusBadge = findViewById(R.id.crusBadge);
         crusBadge.setImageResource(resource);
         TextView crusBadgeText = findViewById(R.id.crusBadgeText);
