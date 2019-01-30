@@ -2,9 +2,10 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/constraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorBackground"
+    android:background="@drawable/darkwood"
     tools:context=".TrainingActivity">
 
     <Button
@@ -129,10 +130,10 @@
         android:layout_width="35dp"
         android:layout_height="35dp"
         android:layout_marginTop="6dp"
-        android:onClick="instructionClick"
-        android:tag="0"
         android:clickable="true"
         android:focusable="true"
+        android:onClick="instructionClick"
+        android:tag="0"
         app:layout_constraintStart_toEndOf="@+id/topLeftButton"
         app:layout_constraintTop_toTopOf="@+id/topLeftButton"
         app:srcCompat="@drawable/informationbutton" />
@@ -142,10 +143,10 @@
         android:layout_width="35dp"
         android:layout_height="35dp"
         android:layout_marginTop="6dp"
-        android:onClick="instructionClick"
-        android:tag="1"
         android:clickable="true"
         android:focusable="true"
+        android:onClick="instructionClick"
+        android:tag="1"
         app:layout_constraintEnd_toStartOf="@+id/topRightButton"
         app:layout_constraintTop_toTopOf="@+id/topRightButton"
         app:srcCompat="@drawable/informationbutton" />
@@ -155,10 +156,10 @@
         android:layout_width="35dp"
         android:layout_height="35dp"
         android:layout_marginTop="6dp"
-        android:onClick="instructionClick"
-        android:tag="2"
         android:clickable="true"
         android:focusable="true"
+        android:onClick="instructionClick"
+        android:tag="2"
         app:layout_constraintStart_toEndOf="@+id/bottomLeftButton"
         app:layout_constraintTop_toTopOf="@+id/bottomLeftButton"
         app:srcCompat="@drawable/informationbutton" />
@@ -168,10 +169,10 @@
         android:layout_width="35dp"
         android:layout_height="35dp"
         android:layout_marginTop="6dp"
-        android:onClick="instructionClick"
-        android:tag="3"
         android:clickable="true"
         android:focusable="true"
+        android:onClick="instructionClick"
+        android:tag="3"
         app:layout_constraintEnd_toStartOf="@+id/bottomRightButton"
         app:layout_constraintTop_toTopOf="@+id/bottomRightButton"
         app:srcCompat="@drawable/informationbutton" />

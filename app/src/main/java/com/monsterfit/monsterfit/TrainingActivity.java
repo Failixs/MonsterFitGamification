@@ -1,5 +1,6 @@
 package com.monsterfit.monsterfit;
 
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -131,18 +132,31 @@ public class TrainingActivity extends AppCompatActivity {
         // create the popup window
         int width = LinearLayout.LayoutParams.WRAP_CONTENT;
         int height = LinearLayout.LayoutParams.WRAP_CONTENT;
-        boolean focusable = false; // lets taps outside the popup also dismiss it
+        boolean focusable = true; // lets taps outside the popup also dismiss it
         final PopupWindow popupWindow = new PopupWindow(popupView, width, height, focusable);
         popupWindowText.setText("Glückwunsch du Maschine!" + "\n \n" );
         popupWindowText.append("Du hast das Monster besiegt!" + "\n");
         popupWindowText.append("Klicke um fortzufahren.");
 
+
         // show the popup window
         // which view you pass in doesn't matter, it is only used for the window tolken
         popupWindow.showAtLocation(v, Gravity.CENTER, 0, 0);
 
-        // dismiss the popup window when touched
         popupView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                finishTheTraining();
+                return true;
+            }
+        });
+
+        Button topLeft = (Button) findViewById(R.id.topLeftButton);
+
+
+        ConstraintLayout constraintLayout = (ConstraintLayout) findViewById(R.id.constraintLayout);
+        // dismiss the popup window when touched
+        constraintLayout.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 finishTheTraining();

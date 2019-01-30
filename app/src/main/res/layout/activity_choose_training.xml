@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background"
+    android:background="@drawable/darkwood"
     tools:context=".ChooseTrainingActivity">
 
     <ImageButton
@@ -15,7 +15,7 @@
         android:tag="TORSO"
         android:src="@drawable/cobra"
         android:scaleType="fitCenter"
-        android:background="@color/background"
+        android:background="@color/opacBackground"
         android:contentDescription="@string/torsoOpp" />
 
     <ImageButton
@@ -26,7 +26,7 @@
         android:tag="ARMS"
         android:src="@drawable/gorilla"
         android:scaleType="fitCenter"
-        android:background="@color/background"
+        android:background="@color/opacBackground"
         android:contentDescription="@string/armOpp" />
 
     <ImageButton
@@ -37,7 +37,7 @@
         android:tag="LEGS"
         android:src="@drawable/octo"
         android:scaleType="fitCenter"
-        android:background="@color/background"
+        android:background="@color/opacBackground"
         android:contentDescription="@string/legOpp" />
 
 </RelativeLayout>

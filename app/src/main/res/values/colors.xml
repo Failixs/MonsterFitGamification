@@ -6,5 +6,5 @@
     <color name="colorAccent">#1ff262</color>
     <color name="colorBackground">#6EACEB</color>
     <color name="background">#6EACEB</color>
-    <color name="opacBackground">#FF000000</color>
+    <color name="opacBackground">#00000000</color>
 </resources>
