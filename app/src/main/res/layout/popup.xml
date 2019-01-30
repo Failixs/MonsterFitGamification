@@ -2,11 +2,12 @@
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/popupLayout"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:background="#ffffff"
-    tools:context=".TrainingActivity">
-
+    android:background="@color/popupColor"
+    tools:context=".TrainingActivity"
+    android:onClick="victoryWindow">
 
     <TextView
         android:id="@+id/victoryTextView"
@@ -15,7 +16,9 @@
         android:layout_centerInParent="true"
         android:onClick="victoryWindow"
         android:layout_margin="15dp"
-        android:textSize="14sp"
+        android:textAlignment="center"
+        android:textSize="30sp"
+        android:textStyle="bold"
         android:text=""/>
 
     <TextView
@@ -25,6 +28,6 @@
         android:layout_centerInParent="true"
         android:layout_margin="15dp"
         android:textSize="14sp"
-        android:text="hier sollte die beschreibung stehen"/>
+        android:text=""/>
 
 </RelativeLayout>

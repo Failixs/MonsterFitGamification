@@ -3,6 +3,7 @@ package com.monsterfit.monsterfit;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -40,6 +41,10 @@ public class TrainingActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+
+
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_training);
 
@@ -94,7 +99,7 @@ public class TrainingActivity extends AppCompatActivity {
                 getSystemService(LAYOUT_INFLATER_SERVICE);
         View popupView = inflater.inflate(R.layout.popup, null);
         final TextView popupWindowText = popupView.findViewById(R.id.popupText);
-        final TextView victoryTextBox = popupView.findViewById(R.id.victoryTextView);
+        //final TextView victoryTextBox = popupView.findViewById(R.id.victoryTextView);
 
         // create the popup window
         int width = LinearLayout.LayoutParams.WRAP_CONTENT;
@@ -103,7 +108,7 @@ public class TrainingActivity extends AppCompatActivity {
         final PopupWindow popupWindow = new PopupWindow(popupView, width, height, focusable);
         popupWindowText.setText(exerciseDone.getTitle() + "\n \n" );
         popupWindowText.append(exerciseDone.getInstruction());
-        victoryTextBox.setText("");
+
 
         // show the popup window
         // which view you pass in doesn't matter, it is only used for the window tolken
@@ -122,21 +127,24 @@ public class TrainingActivity extends AppCompatActivity {
 
     public void victoryWindow(View v){
 
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        int height = displayMetrics.heightPixels;
+        int width = displayMetrics.widthPixels;
 
         // inflate the layout of the popup window
         LayoutInflater inflater = (LayoutInflater)
                 getSystemService(LAYOUT_INFLATER_SERVICE);
         View popupView = inflater.inflate(R.layout.popup, null);
-        final TextView popupWindowText = popupView.findViewById(R.id.popupText);
+        final TextView popupWindowTextVictory = popupView.findViewById(R.id.victoryTextView);
+
 
         // create the popup window
-        int width = LinearLayout.LayoutParams.WRAP_CONTENT;
-        int height = LinearLayout.LayoutParams.WRAP_CONTENT;
-        boolean focusable = true; // lets taps outside the popup also dismiss it
-        final PopupWindow popupWindow = new PopupWindow(popupView, width, height, focusable);
-        popupWindowText.setText("Glückwunsch du Maschine!" + "\n \n" );
-        popupWindowText.append("Du hast das Monster besiegt!" + "\n");
-        popupWindowText.append("Klicke um fortzufahren.");
+        boolean focusable = false; // true lets taps outside the popup also dismiss it
+        final PopupWindow popupWindow = new PopupWindow(popupView, width, height,focusable);
+        popupWindowTextVictory.setText("Glückwunsch du Maschine!" + "\n \n" );
+        popupWindowTextVictory.append("Du hast das Monster besiegt!" + "\n");
+        popupWindowTextVictory.append("Klicke um fortzufahren.");
 
 
         // show the popup window
@@ -151,12 +159,8 @@ public class TrainingActivity extends AppCompatActivity {
             }
         });
 
-        Button topLeft = (Button) findViewById(R.id.topLeftButton);
-
-
-        ConstraintLayout constraintLayout = (ConstraintLayout) findViewById(R.id.constraintLayout);
         // dismiss the popup window when touched
-        constraintLayout.setOnTouchListener(new View.OnTouchListener() {
+        popupWindowTextVictory.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 finishTheTraining();
