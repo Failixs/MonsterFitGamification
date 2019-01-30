@@ -81,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
      */
     private void setImage(){
         ImageView usersPicture = findViewById(R.id.usersPicture);
-        usersPicture.setImageResource(getResources().getIdentifier(getImageResourceName(),"drawable", getPackageName()));
+        usersPicture.setImageResource(getResources().getIdentifier(db.getImageResourceName(),"drawable", getPackageName()));
 
         int resource = getBadgeResource((int)db.getScore(Score.DEFEATED_ARM_MONSTERS).getScore());
         ImageView lacertBadge = findViewById(R.id.lacertBadge);
@@ -152,7 +152,7 @@ public class MainActivity extends AppCompatActivity {
         crusBadge.setLayoutParams(new ConstraintLayout.LayoutParams(params));
 
         ImageView usersPicture = findViewById(R.id.usersPicture);
-        usersPicture.setImageResource(getResources().getIdentifier(getImageResourceName(),"drawable", getPackageName()));
+        usersPicture.setImageResource(getResources().getIdentifier(db.getImageResourceName(),"drawable", getPackageName()));
         params = (ConstraintLayout.LayoutParams) usersPicture.getLayoutParams();
         params.height = (int)Math.ceil(height * 0.6);
         params.width = (int)Math.ceil(width * 0.8 - 30);
@@ -177,28 +177,6 @@ public class MainActivity extends AppCompatActivity {
         else if(count >= 10)
             return R.drawable.bronze;
         else return android.R.color.transparent;
-    }
-
-    /**
-     * gets the name of the image:
-     * @return img + first digit for arms + second digit for torso + third digit for legs
-     */
-    private String getImageResourceName() {
-        return "img"
-                + getImageIndex(db.getScore(Score.DEFEATED_ARM_MONSTERS).getCount())
-                + getImageIndex(db.getScore(Score.DEFEATED_TORSO_MONSTERS).getCount())
-                + getImageIndex(db.getScore(Score.DEFEATED_LEG_MONSTERS).getCount());
-    }
-
-    /**
-     * gets an index for each type
-     * @param count of a specified type
-     * @return index
-     */
-    private String getImageIndex(int count) {
-        if(count == 0) return "1";
-        else if(count <= 4) return "2";
-        else return "3";
     }
 
     /**
@@ -285,7 +263,7 @@ public class MainActivity extends AppCompatActivity {
         index += 1;
         crusmonImage.setAdjustViewBounds(true);
         crusmonImage.setLayoutParams(new ViewGroup.LayoutParams(100, 100));
-        crusmonImage.setBackgroundResource(R.drawable.octo);
+        crusmonImage.setBackgroundResource(R.drawable.octo_icon);
         layout.addView(crusmonImage);
 
         TextView crusmonScoreView = getTextView(18, String.valueOf(db.getScore(Score.DEFEATED_LEG_MONSTERS).getScore()), Gravity.END);

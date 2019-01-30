@@ -231,6 +231,9 @@ public class TrainingActivity extends AppCompatActivity {
                 monster.setImageResource(R.drawable.cobra);
                 break;
         }
+
+        ImageView character = findViewById(R.id.character);
+        character.setImageResource(getResources().getIdentifier(db.getImageResourceName(),"drawable", getPackageName()));
     }
 
     private void setMaxHealth(DatabaseHelper db){

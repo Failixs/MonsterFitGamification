@@ -220,6 +220,26 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.close();
     }
 
+    /**
+     * gets the name of the image:
+     * @return img + first digit for arms + second digit for torso + third digit for legs
+     */
+    public String getImageResourceName() {
+        return "img"
+                + getImageIndex(getScore(Score.DEFEATED_ARM_MONSTERS).getCount())
+                + getImageIndex(getScore(Score.DEFEATED_TORSO_MONSTERS).getCount())
+                + getImageIndex(getScore(Score.DEFEATED_LEG_MONSTERS).getCount());
+    }
 
+    /**
+     * gets an index for each type
+     * @param count of a specified type
+     * @return index
+     */
+    private String getImageIndex(int count) {
+        if(count == 0) return "1";
+        else if(count <= 4) return "2";
+        else return "3";
+    }
 }
 
