@@ -16,7 +16,7 @@
         android:onClick="victoryWindow"
         android:layout_margin="15dp"
         android:textSize="14sp"
-        android:text="hi"/>
+        android:text=""/>
 
     <TextView
         android:id="@+id/popupText"
