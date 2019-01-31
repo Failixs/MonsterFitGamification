@@ -1,6 +1,7 @@
 package com.monsterfit.monsterfit;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.Point;
 import android.graphics.Typeface;
 import android.os.Build;
@@ -185,6 +186,8 @@ public class MainActivity extends AppCompatActivity {
     private void setStatistics(){
 
         ConstraintLayout layout = findViewById(R.id.statisticsLayout);
+        //layout.setBackgroundColor(Color.argb(200,201,201,201));
+
         layout.removeAllViews();
 
         ConstraintSet set = new ConstraintSet();
@@ -308,6 +311,8 @@ public class MainActivity extends AppCompatActivity {
         set.applyTo(layout);
     }
 
+
+
     /**
      * Get a new TextView with specified items
      * @param textSize textsize of the view
@@ -323,7 +328,9 @@ public class MainActivity extends AppCompatActivity {
         } else tv.setId(index);
         tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize);
         tv.setGravity(gravity);
+
         tv.setText(text);
+        tv.setTextColor(Color.argb(230,255,255,255));
 
         index += 1;
 

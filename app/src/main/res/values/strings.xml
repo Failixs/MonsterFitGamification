@@ -12,9 +12,9 @@
 
     <string name="timeInstalled">Installiert seit:</string>
     <string name="timeWorkedOut">Workout-Zeit:</string>
-    <string name="defeatedLacertmons">Lacertmons besiegt:</string>
-    <string name="defeatedTruncmons">Truncmons besiegt:</string>
-    <string name="defeatedCrusmons">Crusmons besiegt:</string>
+    <string name="defeatedLacertmons">Gorillas besiegt:</string>
+    <string name="defeatedTruncmons">Cobras besiegt:</string>
+    <string name="defeatedCrusmons">Octos besiegt:</string>
     <!-- ... -->
     <!-- ... -->
 

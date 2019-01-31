@@ -5,7 +5,7 @@
     android:id="@+id/popupLayout"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:background="@color/popupColor"
+    android:background="@color/colorAccent"
     tools:context=".TrainingActivity"
     android:onClick="victoryWindow">
 

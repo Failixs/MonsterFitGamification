@@ -40,16 +40,16 @@
 
             <TextView
                 android:id="@+id/lacertBadgeText"
-                android:visibility="invisible"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
+                android:layout_marginBottom="24dp"
                 android:gravity="center"
-                app:layout_constraintTop_toTopOf="@+id/lacertBadge"
+                android:text="Gorilla"
+                android:visibility="invisible"
                 app:layout_constraintBottom_toBottomOf="@+id/lacertBadge"
                 app:layout_constraintLeft_toLeftOf="@+id/lacertBadge"
                 app:layout_constraintRight_toRightOf="@+id/lacertBadge"
-                android:text="Lacert"
-                />
+                app:layout_constraintTop_toTopOf="@+id/lacertBadge" />
 
             <ImageView
                 android:id="@+id/truncBadge"
@@ -62,16 +62,16 @@
 
             <TextView
                 android:id="@+id/truncBadgeText"
-                android:visibility="invisible"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
+                android:layout_marginBottom="24dp"
                 android:gravity="center"
-                app:layout_constraintTop_toTopOf="@+id/truncBadge"
+                android:text="Cobra"
+                android:visibility="invisible"
                 app:layout_constraintBottom_toBottomOf="@+id/truncBadge"
                 app:layout_constraintLeft_toLeftOf="@+id/truncBadge"
                 app:layout_constraintRight_toRightOf="@+id/truncBadge"
-                android:text="Trunc"
-                />
+                app:layout_constraintTop_toTopOf="@+id/truncBadge" />
 
             <ImageView
                 android:id="@+id/crusBadge"
@@ -84,16 +84,16 @@
 
             <TextView
                 android:id="@+id/crusBadgeText"
-                android:visibility="invisible"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
+                android:layout_marginBottom="24dp"
                 android:gravity="center"
-                app:layout_constraintTop_toTopOf="@+id/crusBadge"
+                android:text="Octo"
+                android:visibility="invisible"
                 app:layout_constraintBottom_toBottomOf="@+id/crusBadge"
                 app:layout_constraintLeft_toLeftOf="@+id/crusBadge"
                 app:layout_constraintRight_toRightOf="@+id/crusBadge"
-                android:text="Crus"
-                />
+                app:layout_constraintTop_toTopOf="@+id/crusBadge" />
 
             <ImageView
                 android:id="@+id/usersPicture"
