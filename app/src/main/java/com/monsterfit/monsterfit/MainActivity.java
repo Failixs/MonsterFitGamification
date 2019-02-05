@@ -226,7 +226,7 @@ public class MainActivity extends AppCompatActivity {
         index += 1;
         lacertmonImage.setAdjustViewBounds(true);
         lacertmonImage.setLayoutParams(new ViewGroup.LayoutParams(100, 100));
-        lacertmonImage.setBackgroundResource(R.drawable.gorilla);
+        lacertmonImage.setBackgroundResource(R.drawable.gorilla_icon);
         layout.addView(lacertmonImage);
 
         TextView lacertmonScoreView = getTextView(18, String.valueOf(db.getScore(Score.DEFEATED_ARM_MONSTERS).getScore()), Gravity.END);
@@ -246,7 +246,7 @@ public class MainActivity extends AppCompatActivity {
         index += 1;
         truncmonImage.setAdjustViewBounds(true);
         truncmonImage.setLayoutParams(new ViewGroup.LayoutParams(100, 100));
-        truncmonImage.setBackgroundResource(R.drawable.cobra);
+        truncmonImage.setBackgroundResource(R.drawable.cobra_icon);
         layout.addView(truncmonImage);
 
         TextView truncmonScoreView = getTextView(18, String.valueOf(db.getScore(Score.DEFEATED_TORSO_MONSTERS).getScore()), Gravity.END);
